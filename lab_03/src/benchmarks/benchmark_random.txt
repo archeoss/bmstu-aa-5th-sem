@@ -1,0 +1,52 @@
+?   	lab_03	[no test files]
+goos: linux
+goarch: amd64
+pkg: lab_03/algos
+cpu: 11th Gen Intel(R) Core(TM) i5-11320H @ 3.20GHz
+BenchmarkQuicksortRandom/size=100-4         	  621783	      1743 ns/op
+BenchmarkQuicksortRandom/size=200-4         	  308065	      3882 ns/op
+BenchmarkQuicksortRandom/size=300-4         	  188706	      6268 ns/op
+BenchmarkQuicksortRandom/size=400-4         	  147706	      7476 ns/op
+BenchmarkQuicksortRandom/size=500-4         	  118050	      9823 ns/op
+BenchmarkQuicksortRandom/size=600-4         	   92610	     12351 ns/op
+BenchmarkQuicksortRandom/size=700-4         	   88029	     14151 ns/op
+BenchmarkQuicksortRandom/size=800-4         	   69324	     15770 ns/op
+BenchmarkQuicksortRandom/size=900-4         	   63513	     20763 ns/op
+BenchmarkQuicksortRandom/size=1000-4        	   46740	     23476 ns/op
+BenchmarkQuicksortRandom/size=1100-4        	   41511	     28923 ns/op
+BenchmarkQuicksortRandom/size=1200-4        	   34856	     32819 ns/op
+BenchmarkQuicksortRandom/size=1300-4        	   29991	     39822 ns/op
+BenchmarkQuicksortRandom/size=1400-4        	   27507	     44233 ns/op
+BenchmarkQuicksortRandom/size=1500-4        	   24643	     47852 ns/op
+BenchmarkInsertionSortRandom/size=100-4     	  804199	      1284 ns/op
+BenchmarkInsertionSortRandom/size=200-4     	  289795	      4053 ns/op
+BenchmarkInsertionSortRandom/size=300-4     	  135880	      8994 ns/op
+BenchmarkInsertionSortRandom/size=400-4     	   83738	     14040 ns/op
+BenchmarkInsertionSortRandom/size=500-4     	   58015	     20677 ns/op
+BenchmarkInsertionSortRandom/size=600-4     	   40921	     30320 ns/op
+BenchmarkInsertionSortRandom/size=700-4     	   30381	     37372 ns/op
+BenchmarkInsertionSortRandom/size=800-4     	   24040	     49205 ns/op
+BenchmarkInsertionSortRandom/size=900-4     	   19490	     60260 ns/op
+BenchmarkInsertionSortRandom/size=1000-4    	   15981	     73317 ns/op
+BenchmarkInsertionSortRandom/size=1100-4    	   13635	     95890 ns/op
+BenchmarkInsertionSortRandom/size=1200-4    	   10594	    105612 ns/op
+BenchmarkInsertionSortRandom/size=1300-4    	    8905	    124572 ns/op
+BenchmarkInsertionSortRandom/size=1400-4    	    8604	    142997 ns/op
+BenchmarkInsertionSortRandom/size=1500-4    	    7681	    160689 ns/op
+BenchmarkBubbleSortRandom/size=100-4        	  302930	      3747 ns/op
+BenchmarkBubbleSortRandom/size=200-4        	   75964	     15305 ns/op
+BenchmarkBubbleSortRandom/size=300-4        	   28222	     40942 ns/op
+BenchmarkBubbleSortRandom/size=400-4        	   14558	     82610 ns/op
+BenchmarkBubbleSortRandom/size=500-4        	    8697	    130945 ns/op
+BenchmarkBubbleSortRandom/size=600-4        	    5779	    193877 ns/op
+BenchmarkBubbleSortRandom/size=700-4        	    4562	    258041 ns/op
+BenchmarkBubbleSortRandom/size=800-4        	    3640	    336471 ns/op
+BenchmarkBubbleSortRandom/size=900-4        	    2764	    416038 ns/op
+BenchmarkBubbleSortRandom/size=1000-4       	    2337	    514934 ns/op
+BenchmarkBubbleSortRandom/size=1100-4       	    1978	    591679 ns/op
+BenchmarkBubbleSortRandom/size=1200-4       	    1737	    731248 ns/op
+BenchmarkBubbleSortRandom/size=1300-4       	    1476	    823559 ns/op
+BenchmarkBubbleSortRandom/size=1400-4       	    1278	    941162 ns/op
+BenchmarkBubbleSortRandom/size=1500-4       	    1101	   1080983 ns/op
+PASS
+ok  	lab_03/algos	64.259s

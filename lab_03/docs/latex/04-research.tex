@@ -1,1 +1,57 @@
 \chapter{Исследовательская часть}
+Ниже приведены технические характеристики устройства, на котором было проведено тестирование ПО:
+
+\begin{itemize}
+    \item Операционная система: Windows 11 используя Windows Subsystem for Linux 2 (WSL2) \cite{wsl2} Имитирующей Arch Linux \cite{arch} 64-bit.
+    \item Оперативная память: 16 GB.
+    \item Процессор: 11th Gen Intel(R) Core(TM) i5-11320H @ 3.20GHz \cite{i5}.
+\end{itemize}
+
+\section{Время выполнения алгоритмов}
+Алгоритмы тестировались при помощи \("\)бенчмарков\("\) предоставляемых встренными средствами языка Go \cite{go}.
+Пример такого "бенчмарка приведен в листинге \ref{lst:benchmark}.
+Количество повторов регулируется тестирующей системой самоятоятельно, хотя при желание оные можно задать.
+Точное количество повторов определяется в зависимости от того, был ли получен стабильный результат согласно системе.
+
+\lstinputlisting[style=go, caption={Пример бенчмарка}, label={lst:benchmark} , firstline=144, lastline=159]{../../src/algos/sorting_test.go}
+
+Таблица времени выполнения сортировок на отсортированных данных (в наносекундах)\newline
+\includesvg[%
+    width=18cm,height=15cm,inkscapelatex=false,
+    inkscapeformat=pdf,
+%  inkscapelatex=false,
+%  distort=true,
+%    angle=-12.5,
+%  extractdistort=false,
+%  extractangle=inherit,
+]{plot-sorted}%
+
+Таблица времени выполнения сортировок на отсортированных данных в обратном порядке (в наносекундах)\newline
+\includesvg[%
+    width=18cm,height=15cm,inkscapelatex=false,
+    inkscapeformat=pdf,
+%  inkscapelatex=false,
+%  distort=true,
+%    angle=-12.5,
+%  extractdistort=false,
+%  extractangle=inherit,
+]{plot-reversed}%
+
+Таблица времени выполнения сортировок на случайных данных (в наносекундах)\newline
+    \includesvg[%
+        width=18cm,height=15cm,inkscapelatex=false,
+        inkscapeformat=pdf,
+%  inkscapelatex=false,
+%  distort=true,
+%    angle=-12.5,
+%  extractdistort=false,
+%  extractangle=inherit,
+    ]{plot-random}%
+
+
+\section{Вывод}
+
+Как и ожидалось в результате оценки трудоемкости алгоритмов, сортировка вставками работает очень быстро на уже отсортированном массиве.
+Время сортировки вставками на всех трёх видах массивов примерно одинаково.
+При обратно отсортированном массиве, быстрая сортировка начинает значительно проигрывать по скорости.
+

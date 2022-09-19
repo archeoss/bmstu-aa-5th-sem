@@ -12,6 +12,7 @@ func partition[T constraints.Ordered](arr []T, left int, right int) int {
 		}
 	}
 	arr[i+1], arr[right] = arr[right], arr[i+1]
+
 	return i + 1
 }
 
@@ -31,27 +32,28 @@ func Quicksort[T constraints.Ordered](array []T) {
 			continue
 		}
 		pivot := partition(array, left, right)
-		//if pivot-left > right-pivot {
 		stack.Push([2]int{left, pivot - 1})
 		stack.Push([2]int{pivot + 1, right})
-		//} else {
-		//	stack.Push([2]int{pivot + 1, right})
-		//	stack.Push([2]int{left, pivot - 1})
-		//}
 	}
 }
 
 func InsertionSort[T constraints.Ordered](array []T) {
-	for i := 1; i < len(array); i++ {
-		for j := i - 1; j >= 0 && array[j] > array[j+1]; j-- {
-			array[j], array[j+1] = array[j+1], array[j]
+	l := len(array)
+	for i := 0; i < l; i++ {
+		x := array[i]
+		j := i
+		for j > 0 && array[j-1] > x {
+			array[j] = array[j-1]
+			j--
 		}
+		array[j] = x
 	}
 }
 
 func BubbleSort[T constraints.Ordered](array []T) {
-	for i := 0; i < len(array)-1; i++ {
-		for j := 0; j < len(array)-i-1; j++ {
+	n := len(array) - 1
+	for i := 0; i < n; i++ {
+		for j := 0; j < n-i; j++ {
 			if array[j] > array[j+1] {
 				array[j], array[j+1] = array[j+1], array[j]
 			}

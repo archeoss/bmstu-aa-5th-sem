@@ -5,8 +5,9 @@ import (
 	"testing"
 )
 
+const BEGIN = 25
 const STEPS = 15
-const INC = 25
+const INC = 100
 
 func TestQuicksort(t *testing.T) {
 	res := [10]int{2, 7, 0, 1, 3, 8, 6, 4, 10, 9}
@@ -89,47 +90,155 @@ func TestBubbleSortReversed(t *testing.T) {
 	}
 }
 
-func BenchmarkQuicksort(b *testing.B) {
+func BenchmarkQuicksortRandom(b *testing.B) {
 	for steps, amount := 0, 0; steps < STEPS; steps++ {
 		amount += INC
 		b.Run(fmt.Sprintf("size=%d", amount), func(b *testing.B) {
 			sample := GenerateArray(amount)
 			sampleCopy := make([]int, amount)
+			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
+				//b.StopTimer()
 				copy(sampleCopy, sample)
+				//b.StartTimer()
 				Quicksort(sampleCopy)
 			}
-
 		})
 	}
 }
 
-func BenchmarkInsertionSort(b *testing.B) {
+func BenchmarkInsertionSortRandom(b *testing.B) {
 	for steps, amount := 0, 0; steps < STEPS; steps++ {
 		amount += INC
 		b.Run(fmt.Sprintf("size=%d", amount), func(b *testing.B) {
 			sample := GenerateArray(amount)
 			sampleCopy := make([]int, amount)
+			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
+				//b.StopTimer()
 				copy(sampleCopy, sample)
+				//b.StartTimer()
 				InsertionSort(sampleCopy)
 			}
-
 		})
 	}
 }
 
-func BenchmarkBubbleSort(b *testing.B) {
+func BenchmarkBubbleSortRandom(b *testing.B) {
 	for steps, amount := 0, 0; steps < STEPS; steps++ {
 		amount += INC
 		b.Run(fmt.Sprintf("size=%d", amount), func(b *testing.B) {
 			sample := GenerateArray(amount)
 			sampleCopy := make([]int, amount)
+			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
+				//b.StopTimer()
 				copy(sampleCopy, sample)
+				//b.StartTimer()
 				BubbleSort(sampleCopy)
 			}
+		})
+	}
+}
 
+func BenchmarkQuicksortSorted(b *testing.B) {
+	for steps, amount := 0, 0; steps < STEPS; steps++ {
+		amount += INC
+		b.Run(fmt.Sprintf("size=%d", amount), func(b *testing.B) {
+			sample := GenerateSortedArray(amount)
+			sampleCopy := make([]int, amount)
+			b.ResetTimer()
+			for i := 0; i < b.N; i++ {
+				//b.StopTimer()
+				copy(sampleCopy, sample)
+				//b.StartTimer()
+				Quicksort(sampleCopy)
+			}
+		})
+	}
+}
+
+func BenchmarkInsertionSortSorted(b *testing.B) {
+	for steps, amount := 0, 0; steps < STEPS; steps++ {
+		amount += INC
+		b.Run(fmt.Sprintf("size=%d", amount), func(b *testing.B) {
+			sample := GenerateSortedArray(amount)
+			sampleCopy := make([]int, amount)
+			b.ResetTimer()
+			for i := 0; i < b.N; i++ {
+				//b.StopTimer()
+				copy(sampleCopy, sample)
+				//b.StartTimer()
+				InsertionSort(sampleCopy)
+			}
+		})
+	}
+}
+
+func BenchmarkBubbleSortSorted(b *testing.B) {
+	for steps, amount := 0, 0; steps < STEPS; steps++ {
+		amount += INC
+		b.Run(fmt.Sprintf("size=%d", amount), func(b *testing.B) {
+			sample := GenerateSortedArray(amount)
+			sampleCopy := make([]int, amount)
+			b.ResetTimer()
+			for i := 0; i < b.N; i++ {
+				//b.StopTimer()
+				copy(sampleCopy, sample)
+				//b.StartTimer()
+				BubbleSort(sampleCopy)
+			}
+		})
+	}
+}
+
+func BenchmarkQuicksortReversed(b *testing.B) {
+	for steps, amount := 0, 0; steps < STEPS; steps++ {
+		amount += INC
+		b.Run(fmt.Sprintf("size=%d", amount), func(b *testing.B) {
+			sample := GenerateReversedArray(amount)
+			sampleCopy := make([]int, amount)
+			b.ResetTimer()
+			for i := 0; i < b.N; i++ {
+				//b.StopTimer()
+				copy(sampleCopy, sample)
+				//b.StartTimer()
+				Quicksort(sampleCopy)
+			}
+		})
+	}
+}
+
+func BenchmarkInsertionSortReversed(b *testing.B) {
+	for steps, amount := 0, 0; steps < STEPS; steps++ {
+		amount += INC
+		b.Run(fmt.Sprintf("size=%d", amount), func(b *testing.B) {
+			sample := GenerateReversedArray(amount)
+			sampleCopy := make([]int, amount)
+			b.ResetTimer()
+			for i := 0; i < b.N; i++ {
+				//b.StopTimer()
+				copy(sampleCopy, sample)
+				//b.StartTimer()
+				InsertionSort(sampleCopy)
+			}
+		})
+	}
+}
+
+func BenchmarkBubbleSortReversed(b *testing.B) {
+	for steps, amount := 0, 0; steps < STEPS; steps++ {
+		amount += INC
+		b.Run(fmt.Sprintf("size=%d", amount), func(b *testing.B) {
+			sample := GenerateReversedArray(amount)
+			sampleCopy := make([]int, amount)
+			b.ResetTimer()
+			for i := 0; i < b.N; i++ {
+				//b.StopTimer()
+				copy(sampleCopy, sample)
+				//b.StartTimer()
+				BubbleSort(sampleCopy)
+			}
 		})
 	}
 }

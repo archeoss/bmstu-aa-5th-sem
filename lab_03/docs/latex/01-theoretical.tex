@@ -1,1 +1,82 @@
 \chapter{Аналитическая часть}
+
+\section{Пузырьковая сортировка}
+
+\subsection{Описание алгоритма}
+
+\begin{algorithmic}
+\Procedure{BubbleSort}{$A$}
+\State $n \gets$ \texttt{len}($A$)
+\For{$i \gets 1$ \textbf{to} $n$}
+\For{$j \gets 1$ \textbf{to} $n - i$}
+\If{$A[j] > A[j + 1]$}
+\State $SWAP(A[j], A[j + 1])$
+\EndIf
+\EndFor
+\EndFor
+\EndProcedure
+\end{algorithmic}
+
+\subsection{Анализ алгоритма}
+
+\begin{itemize}
+\item Время выполнения алгоритма: $O(n^2)$
+\item Память: $O(1)$
+\end{itemize}
+
+\section{Сортировка вставками}
+
+\subsection{Описание алгоритма}
+
+\begin{algorithmic}
+\Procedure{InsertionSort}{$A$}
+\State $n \gets$ \texttt{len}($A$)
+\For{$i \gets 1$ \textbf{to} $n$}
+\State $x \gets A[i]$
+\State $j \gets i - 1$
+\While{$j \geq 0$ \textbf{and} $A[j] > x$}
+\State $A[j + 1] \gets A[j]$
+\State $j \gets j - 1$
+\EndWhile
+\State $A[j + 1] \gets x$
+\EndFor
+\EndProcedure
+\end{algorithmic}
+
+\subsection{Анализ алгоритма}
+
+\begin{itemize}
+\item Время выполнения алгоритма: $O(n^2)$
+\item Память: $O(1)$
+\end{itemize}
+
+\section{Итеративная быстрая сортировка}
+
+\subsection{Описание алгоритма}
+
+\begin{algorithmic}
+\Procedure{QuickSort}{$A$}
+\State $n \gets$ \texttt{len}($A$)
+\State $S \gets \{\}$ \Comment{Стек}
+\State $S \gets S \cup \{0, n - 1\}$
+\While{$S \neq \{\}$}
+\State $r \gets S[n_S - 1]$
+\State $l \gets S[n_S - 2]$
+\State $S \gets S \setminus \{r, l\}$
+\State $p \gets$ \texttt{partition}($A, l, r$)
+%\If{$p - 1 > l$}
+\State $S \gets S \cup \{l, p - 1\}$
+%\EndIf
+%\If{$p + 1 < r$}
+\State $S \gets S \cup \{p + 1, r\}$
+%\EndIf
+\EndWhile
+\EndProcedure
+\end{algorithmic}
+
+\subsection{Анализ алгоритма}
+
+\begin{itemize}
+\item Время выполнения алгоритма: $O(n \log n)$
+\item Память: $O(\log n)$
+\end{itemize}

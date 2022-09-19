@@ -18,7 +18,7 @@ func check(arr1 []int, arr2 []int) bool {
 
 func main() {
 	s := 25
-	for i := 0; i < 1050; i++ {
+	for i := 0; i < 250; i++ {
 		array := algos.GenerateArray(s)
 		array2 := make([]int, s)
 		s += 25

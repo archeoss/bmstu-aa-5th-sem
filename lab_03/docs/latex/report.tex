@@ -1,4 +1,31 @@
 \documentclass{bmstu}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{svg}
+\svgpath{{./inc/img/}}
+\usepackage{listings}
+
+\usepackage{xcolor}
+\usepackage{bmstu-biblio}
+\lstdefinestyle{go}{
+    language=Go,
+    backgroundcolor=\color{white},
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\color{cyan},
+    stringstyle=\color{green},
+    commentstyle=\color{gray},
+    numbers=left,
+    stepnumber=1,
+    numbersep=5pt,
+    frame=single,
+    tabsize=4,
+    captionpos=t,
+    breaklines=true,
+    breakatwhitespace=true,
+    escapeinside={\#*}{*)},
+    morecomment=[l][\color{magenta}]{\#},
+    columns=fullflexible
+}
 
 \bibliography{biblio}
 
@@ -14,6 +41,8 @@
 {Романов~С.~К.}
 {Волкова.~Л.~Л.}
 
+\tableofcontents
+
 \include{00-intro}
 
 \include{01-theoretical}
@@ -25,5 +54,6 @@
 %\include{03-appendix}
 
 \makebibliography
+
 
 \end{document}
