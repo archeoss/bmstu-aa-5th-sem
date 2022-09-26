@@ -41,29 +41,30 @@
 <text x="412.11" y="11.555" transform="scale(1, -1)"
 	style="font-family:Times;font-weight:normal;font-style:normal;font-size:12px">ns/op</text>
 </g>
-<text x="15.416" y="-125.32" transform="scale(1, -1)"
+<text x="15.416" y="-123.33" transform="scale(1, -1)"
 	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">100000</text>
-<text x="15.416" y="-425.02" transform="scale(1, -1)"
+<text x="15.416" y="-418.12" transform="scale(1, -1)"
 	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">400000</text>
-<text x="15.416" y="-724.72" transform="scale(1, -1)"
+<text x="15.416" y="-712.91" transform="scale(1, -1)"
 	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">700000</text>
-<path d="M47.916,130.05L55.916,130.05" style="fill:none;stroke:#000000;stroke-width:0.5" />
-<path d="M47.916,429.74L55.916,429.74" style="fill:none;stroke:#000000;stroke-width:0.5" />
-<path d="M47.916,729.44L55.916,729.44" style="fill:none;stroke:#000000;stroke-width:0.5" />
-<path d="M51.916,229.94L55.916,229.94" style="fill:none;stroke:#000000;stroke-width:0.5" />
-<path d="M51.916,329.84L55.916,329.84" style="fill:none;stroke:#000000;stroke-width:0.5" />
-<path d="M51.916,529.64L55.916,529.64" style="fill:none;stroke:#000000;stroke-width:0.5" />
-<path d="M51.916,629.54L55.916,629.54" style="fill:none;stroke:#000000;stroke-width:0.5" />
+<path d="M47.916,128.05L55.916,128.05" style="fill:none;stroke:#000000;stroke-width:0.5" />
+<path d="M47.916,422.84L55.916,422.84" style="fill:none;stroke:#000000;stroke-width:0.5" />
+<path d="M47.916,717.63L55.916,717.63" style="fill:none;stroke:#000000;stroke-width:0.5" />
+<path d="M51.916,226.32L55.916,226.32" style="fill:none;stroke:#000000;stroke-width:0.5" />
+<path d="M51.916,324.58L55.916,324.58" style="fill:none;stroke:#000000;stroke-width:0.5" />
+<path d="M51.916,521.11L55.916,521.11" style="fill:none;stroke:#000000;stroke-width:0.5" />
+<path d="M51.916,619.37L55.916,619.37" style="fill:none;stroke:#000000;stroke-width:0.5" />
+<path d="M51.916,815.9L55.916,815.9" style="fill:none;stroke:#000000;stroke-width:0.5" />
 <path d="M55.916,30.23L55.916,820" style="fill:none;stroke:#000000;stroke-width:0.5" />
-<path d="M64.166,35.26L176.01,47.025L287.86,65.986L399.7,91.106L511.55,123.9L623.39,163.35L735.24,209.26L847.08,260.84L958.93,322.86L1070.8,385.63L1182.6,461.41L1294.5,542.65L1406.3,632.77L1518.2,720.96L1630,820" style="fill:none;stroke:#F15A60" />
-<path d="M64.166,30.23L176.01,30.324L287.86,30.431L399.7,30.453L511.55,30.528L623.39,30.602L735.24,30.666L847.08,30.743L958.93,30.813L1070.8,30.894L1182.6,30.959L1294.5,31.029L1406.3,31.108L1518.2,31.177L1630,31.249" style="fill:none;stroke:#7AC36A" />
-<path d="M64.166,33.705L176.01,43.031L287.86,58.315L399.7,78.947L511.55,105.18L623.39,138.19L735.24,177.02L847.08,218.84L958.93,268.71L1070.8,326.78L1182.6,385.36L1294.5,450.19L1406.3,522.92L1518.2,607.3L1630,689.16" style="fill:none;stroke:#5A9BD4" />
+<path d="M64.166,34.932L176.01,46.626L287.86,65.046L399.7,90.217L511.55,122.28L623.39,162.28L735.24,208.07L847.08,258.97L958.93,322.93L1070.8,386.93L1182.6,464.54L1294.5,541.4L1406.3,624.73L1518.2,719.38L1630,820" style="fill:none;stroke:#F15A60" />
+<path d="M64.166,30.23L176.01,30.58L287.86,31.083L399.7,31.349L511.55,31.881L623.39,32.143L735.24,32.619L847.08,32.879L958.93,33.665L1070.8,33.845L1182.6,34.176L1294.5,34.461L1406.3,34.963L1518.2,35.544L1630,35.721" style="fill:none;stroke:#7AC36A" />
+<path d="M64.166,33.335L176.01,42.708L287.86,57.805L399.7,78.445L511.55,104.55L623.39,137.31L735.24,173.77L847.08,217.49L958.93,269.93L1070.8,324.69L1182.6,388L1294.5,453.33L1406.3,522.87L1518.2,597.67L1630,685.34" style="fill:none;stroke:#5A9BD4" />
 <path d="M1620,814.11L1640,814.11" style="fill:none;stroke:#F15A60" />
 <text x="1468.3" y="-808.45" transform="scale(1, -1)"
 	style="font-family:Times;font-weight:normal;font-style:normal;font-size:12px">[BenchmarkQuicksortSorted=]</text>
 <path d="M1620,802.33L1640,802.33" style="fill:none;stroke:#7AC36A" />
-<text x="1452.9" y="-796.67" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:12px">[BenchmarkInsertionSortSorted=]</text>
+<text x="1450.9" y="-796.67" transform="scale(1, -1)"
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:12px">[BenchmarkCountingSortSorted=]</text>
 <path d="M1620,790.56L1640,790.56" style="fill:none;stroke:#5A9BD4" />
 <text x="1460.9" y="-784.89" transform="scale(1, -1)"
 	style="font-family:Times;font-weight:normal;font-style:normal;font-size:12px">[BenchmarkBubbleSortSorted=]</text>

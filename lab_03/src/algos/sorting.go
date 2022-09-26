@@ -37,16 +37,28 @@ func Quicksort[T constraints.Ordered](array []T) {
 	}
 }
 
-func InsertionSort[T constraints.Ordered](array []T) {
-	l := len(array)
-	for i := 0; i < l; i++ {
-		x := array[i]
-		j := i
-		for j > 0 && array[j-1] > x {
-			array[j] = array[j-1]
-			j--
+func CountingSort(array []int) {
+	maxVal := array[0]
+	for _, val := range array {
+		if val > maxVal {
+			maxVal = val
 		}
-		array[j] = x
+	}
+	temp := make([]int, maxVal+1)
+	for _, val := range array {
+		temp[val]++
+	}
+
+	j, i := 0, 0
+
+	for i < len(temp) && j < len(array) {
+		if temp[i] > 0 {
+			array[j] = i
+			j++
+			temp[i]--
+		} else {
+			i++
+		}
 	}
 }
 

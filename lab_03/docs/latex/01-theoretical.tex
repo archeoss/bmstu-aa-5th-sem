@@ -20,34 +20,53 @@
 \subsection{Анализ алгоритма}
 
 \begin{itemize}
-\item Время выполнения алгоритма: $O(n^2)$
-\item Память: $O(1)$
+    \item Время выполнения алгоритма: $O(n^2)$
+    \item Память: $O(1)$
 \end{itemize}
 
-\section{Сортировка вставками}
+\section{Сортировка подсчетом}
 
 \subsection{Описание алгоритма}
 
 \begin{algorithmic}
-\Procedure{InsertionSort}{$A$}
+\Procedure{Counting Sort}{$A$}
 \State $n \gets$ \texttt{len}($A$)
+\State $C \gets$ \texttt{new} \texttt{array}($n$)
 \For{$i \gets 1$ \textbf{to} $n$}
-\State $x \gets A[i]$
-\State $j \gets i - 1$
-\While{$j \geq 0$ \textbf{and} $A[j] > x$}
-\State $A[j + 1] \gets A[j]$
-\State $j \gets j - 1$
-\EndWhile
-\State $A[j + 1] \gets x$
+\State $C[i] \gets 0$
 \EndFor
+\For{$i \gets 1$ \textbf{to} $n$}
+\State $C[A[i]] \gets C[A[i]] + 1$
+\EndFor
+%\For{$i \gets 2$ \textbf{to} $n$}
+%\State $C[i] \gets C[i] + C[i - 1]$
+%\EndFor
+\State $i \gets$ 0
+\State $j \gets$ 0
+\While{$i \neq len(A) \&\& j \neq n$}
+\If{$C[j] \neq 0$}
+\State $A[i] \gets j$
+\State $C[j] \gets C[j] - 1$
+\State $i \gets i + 1$
+\Else
+\State $j \gets j + 1$
+\EndIf
+\EndWhile
 \EndProcedure
 \end{algorithmic}
 
 \subsection{Анализ алгоритма}
 
 \begin{itemize}
-\item Время выполнения алгоритма: $O(n^2)$
-\item Память: $O(1)$
+    \item Время выполнения алгоритма: $O(n + k)$
+    \item Память: $O(n + k)$
+    \begin{itemize}
+        \item[$-$] $n$ - размер массива
+        \item[$-$] $k$ - максимальное значение элемента массива
+    \end{itemize}
+    \item Сортировка подсчетом работает только с целыми числами
+    \item Сортировка подсчетом не является устойчивой
+    \item Сортировка подсчетом не подходит для сортировки больших массивов
 \end{itemize}
 
 \section{Итеративная быстрая сортировка}
@@ -77,6 +96,6 @@
 \subsection{Анализ алгоритма}
 
 \begin{itemize}
-\item Время выполнения алгоритма: $O(n \log n)$
-\item Память: $O(\log n)$
+    \item Время выполнения алгоритма: $O(n \log n)$
+    \item Память: $O(\log n)$
 \end{itemize}

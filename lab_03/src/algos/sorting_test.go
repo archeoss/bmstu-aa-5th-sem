@@ -36,27 +36,27 @@ func TestQuicksortReversed(t *testing.T) {
 	}
 }
 
-func TestInsertionSort(t *testing.T) {
+func TestCountingSort(t *testing.T) {
 	res := [10]int{2, 7, 0, 1, 3, 8, 6, 4, 10, 9}
-	InsertionSort(res[:])
+	CountingSort(res[:])
 	correct := [10]int{0, 1, 2, 3, 4, 6, 7, 8, 9, 10}
 	if res != correct {
 		t.Errorf("Incorrect sort result: got - '%v', correct - '%v'", res[:], correct[:])
 	}
 }
 
-func TestInsertionSortSorted(t *testing.T) {
+func TestCountingSortSorted(t *testing.T) {
 	res := [10]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-	InsertionSort(res[:])
+	CountingSort(res[:])
 	correct := [10]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 	if res != correct {
 		t.Errorf("Incorrect sort result: got - '%v', correct - '%v'", res[:], correct[:])
 	}
 }
 
-func TestInsertionSortReversed(t *testing.T) {
+func TestCountingSortReversed(t *testing.T) {
 	res := [10]int{9, 8, 7, 6, 5, 4, 3, 2, 1, 0}
-	InsertionSort(res[:])
+	CountingSort(res[:])
 	correct := [10]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 	if res != correct {
 		t.Errorf("Incorrect sort result: got - '%v', correct - '%v'", res[:], correct[:])
@@ -98,16 +98,16 @@ func BenchmarkQuicksortRandom(b *testing.B) {
 			sampleCopy := make([]int, amount)
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
-				//b.StopTimer()
+				//b.StopTimer()		// Disabled Due performance reasons
 				copy(sampleCopy, sample)
-				//b.StartTimer()
+				//b.StartTimer()	// Disabled Due performance reasons
 				Quicksort(sampleCopy)
 			}
 		})
 	}
 }
 
-func BenchmarkInsertionSortRandom(b *testing.B) {
+func BenchmarkCountingSortRandom(b *testing.B) {
 	for steps, amount := 0, 0; steps < STEPS; steps++ {
 		amount += INC
 		b.Run(fmt.Sprintf("size=%d", amount), func(b *testing.B) {
@@ -115,10 +115,10 @@ func BenchmarkInsertionSortRandom(b *testing.B) {
 			sampleCopy := make([]int, amount)
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
-				//b.StopTimer()
+				//b.StopTimer()		// Disabled Due performance reasons
 				copy(sampleCopy, sample)
-				//b.StartTimer()
-				InsertionSort(sampleCopy)
+				//b.StartTimer()	// Disabled Due performance reasons
+				CountingSort(sampleCopy)
 			}
 		})
 	}
@@ -132,9 +132,9 @@ func BenchmarkBubbleSortRandom(b *testing.B) {
 			sampleCopy := make([]int, amount)
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
-				//b.StopTimer()
+				//b.StopTimer()		// Disabled Due performance reasons
 				copy(sampleCopy, sample)
-				//b.StartTimer()
+				//b.StartTimer()	// Disabled Due performance reasons
 				BubbleSort(sampleCopy)
 			}
 		})
@@ -149,16 +149,16 @@ func BenchmarkQuicksortSorted(b *testing.B) {
 			sampleCopy := make([]int, amount)
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
-				//b.StopTimer()
+				//b.StopTimer()		// Disabled Due performance reasons
 				copy(sampleCopy, sample)
-				//b.StartTimer()
+				//b.StartTimer()	// Disabled Due performance reasons
 				Quicksort(sampleCopy)
 			}
 		})
 	}
 }
 
-func BenchmarkInsertionSortSorted(b *testing.B) {
+func BenchmarkCountingSortSorted(b *testing.B) {
 	for steps, amount := 0, 0; steps < STEPS; steps++ {
 		amount += INC
 		b.Run(fmt.Sprintf("size=%d", amount), func(b *testing.B) {
@@ -166,10 +166,10 @@ func BenchmarkInsertionSortSorted(b *testing.B) {
 			sampleCopy := make([]int, amount)
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
-				//b.StopTimer()
+				//b.StopTimer()		// Disabled Due performance reasons
 				copy(sampleCopy, sample)
-				//b.StartTimer()
-				InsertionSort(sampleCopy)
+				//b.StartTimer()	// Disabled Due performance reasons
+				CountingSort(sampleCopy)
 			}
 		})
 	}
@@ -183,9 +183,9 @@ func BenchmarkBubbleSortSorted(b *testing.B) {
 			sampleCopy := make([]int, amount)
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
-				//b.StopTimer()
+				//b.StopTimer()		// Disabled Due performance reasons
 				copy(sampleCopy, sample)
-				//b.StartTimer()
+				//b.StartTimer()	// Disabled Due performance reasons
 				BubbleSort(sampleCopy)
 			}
 		})
@@ -200,16 +200,16 @@ func BenchmarkQuicksortReversed(b *testing.B) {
 			sampleCopy := make([]int, amount)
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
-				//b.StopTimer()
+				//b.StopTimer()		// Disabled Due performance reasons
 				copy(sampleCopy, sample)
-				//b.StartTimer()
+				//b.StartTimer()	// Disabled Due performance reasons
 				Quicksort(sampleCopy)
 			}
 		})
 	}
 }
 
-func BenchmarkInsertionSortReversed(b *testing.B) {
+func BenchmarkCountingSortReversed(b *testing.B) {
 	for steps, amount := 0, 0; steps < STEPS; steps++ {
 		amount += INC
 		b.Run(fmt.Sprintf("size=%d", amount), func(b *testing.B) {
@@ -217,10 +217,10 @@ func BenchmarkInsertionSortReversed(b *testing.B) {
 			sampleCopy := make([]int, amount)
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
-				//b.StopTimer()
+				//b.StopTimer()		// Disabled Due performance reasons
 				copy(sampleCopy, sample)
-				//b.StartTimer()
-				InsertionSort(sampleCopy)
+				//b.StartTimer()	// Disabled Due performance reasons
+				CountingSort(sampleCopy)
 			}
 		})
 	}
@@ -234,9 +234,9 @@ func BenchmarkBubbleSortReversed(b *testing.B) {
 			sampleCopy := make([]int, amount)
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
-				//b.StopTimer()
+				//b.StopTimer()		// Disabled Due performance reasons
 				copy(sampleCopy, sample)
-				//b.StartTimer()
+				//b.StartTimer()	// Disabled Due performance reasons
 				BubbleSort(sampleCopy)
 			}
 		})

@@ -2,11 +2,236 @@
 
 \section{Разработка алгоритмов}
 
-На рисунках \ref{img:bsort} \ref{img:isort} \ref{img:qsort} приведены схемы алгоритмов сортировки пузырьком, сортировки вставками и быстрой сортировки соответственно.
+На рисунках \ref{img:bsort}, \ref{img:csort} и \ref{img:qsort} приведены схемы алгоритмов сортировки пузырьком,
+сортировки подсчетом и быстрой сортировки соответственно.
 
 \section{Трудоёмкость алгоритмов}
 
-\textbf{TBD}
+\section{Модель вычислений}
+
+Для последующего вычисления трудоемкости введём модель вычислений:
+
+\begin{enumerate}
+    \item Операции из списка \eqref{for:opers} имеют трудоемкость 1.
+    \begin{equation}
+        \label{for:opers}
+        +, -, /, \%, ==, !=, <, >, <=, >=, [], ++, {-}-
+    \end{equation}
+    \item Трудоемкость оператора выбора if условие then A else B рассчитывается, как \eqref{for:if}.
+    \begin{equation}
+        \label{for:if}
+        f_{if} = f_{\text{условия}} +
+        \begin{cases}
+            f_A, & \text{если условие выполняется,}\\
+            f_B, & \text{иначе.}
+        \end{cases}
+    \end{equation}
+    \item Трудоемкость цикла рассчитывается, как \eqref{for:for}.
+    \begin{equation}
+        \label{for:for}
+        f_{for} = f_{\text{инициализации}} + f_{\text{сравнения}} + N(f_{\text{тела}} + f_{\text{инкремента}} + f_{\text{сравнения}})
+    \end{equation}
+    \item Трудоемкость вызова функции равна 0.
+\end{enumerate}
+
+\section{Трудоёмкость алгоритмов}
+
+Пусть размер массивов во всех вычислениях обозначается как $N$.
+
+\subsection{Алгоритм сортировки пузырьком}
+
+Трудоёмкость алгоритма сортировки пузырьком состоит из:
+\begin{itemize}
+    \item трудоёмкость сравнения и инкремента внешнего цикла $i \in [1..N)$ \eqref{for:bubble_outer}:
+    \begin{equation}
+        \label{for:bubble_outer}
+        f_{i} = 2 + 2(N - 1)
+    \end{equation}
+    \item суммарная трудоёмкость внутренних циклов, количество итераций которых меняется в промежутке $[1..N-1]$ \eqref{for:bubble_inner}:
+    \begin{equation}
+        \label{for:bubble_inner}
+        f_{j} = 3(N - 1) + \frac{N \cdot (N - 1)}{2} \cdot (3 + f_{if})
+    \end{equation}
+    \item трудоёмкость условия во внутреннем цикле \eqref{for:bubble_if}:
+    \begin{equation}
+        \label{for:bubble_if}
+        f_{if} = 4 + \begin{cases}
+                         0, & \text{в лучшем случае}\\
+                         9, & \text{в худшем случае}\\
+        \end{cases}
+    \end{equation}
+\end{itemize}
+
+Трудоёмкость в \textbf{лучшем} случае \eqref{for:bubble_best}:
+\begin{equation}
+    \label{for:bubble_best}
+    f_{best} = \frac{7}{2} N^2 + \frac{3}{2} N - 3 \approx \frac{7}{2} N^2 = O(N^2)
+\end{equation}
+
+Трудоёмкость в \textbf{худшем} случае \eqref{for:bubble_worst}:
+\begin{equation}
+    \label{for:bubble_worst}
+    f_{worst} =  8N^2 - 8N - 3 \approx 8N^2 = O(N^2)
+\end{equation}
+
+\subsection{Алгоритм сортировки подсчетом}
+
+Трудоёмкость алгоритма сортировки подсчетом состоит из:
+\begin{enumerate}
+    \item нахождение максимального числа в массиве $A$.
+    \item трудоёмкость инициализации массива $C$ размером $k$ нулями, где $k = max(A)$.
+    \item проход по массиву $A$ и подсчет количества вхождений каждого числа в массиве $C$.
+    \item проход по массиву $C$ и запись чисел в массив $A$ в соответствии с их количеством в массиве $C$.
+\end{enumerate}
+
+Вычислим каждую трудоёмкость отдельно.
+
+\begin{enumerate}
+    \item Трудоёмкость нахождения максимального числа в массиве $A$\eqref{eq:counting_max}.
+    \begin{equation}
+        \label{eq:counting_max}
+        f_{max} = 2 + 2(N - 1) = 4N - 3
+    \end{equation}
+    \item Трудоёмкость инициализации массива $C$\eqref{eq:init}.
+    \begin{equation}
+        \label{eq:init}
+        f_{C} = 2 + 2(k - 1) = 4k - 3
+    \end{equation}
+    \item Трудоёмкость подсчета количества вхождений каждого числа в массиве $C$\eqref{eq:counting}.
+    \begin{equation}
+        \label{eq:counting}
+        f_{count} = 2 + 2(N - 1) = 4N - 3
+    \end{equation}
+    \item проход по массиву $C$ и запись чисел в массив $A$ в соответствии с их количеством в массиве $C$\eqref{eq:write}.
+    \begin{equation}
+        \label{eq:write}
+        f_{write} = 6 + 7 * N + \begin{cases}
+                            0, & \text{в лучшем случае}\\
+                            3k, & \text{в худшем случае}\\
+        \end{cases}
+    \end{equation}
+\end{enumerate}
+
+Трудоёмкость в \textbf{лучшем} случае \eqref{eq:counting_best}:
+\begin{equation}
+    \label{eq:counting_best}
+    f_{best} = 15N + 4k - 3 \approx 15N + 4k = O(N + k)
+\end{equation}
+
+Трудоёмкость в \textbf{худшем} случае \eqref{eq:counting_worst}:
+\begin{equation}
+    \label{eq:counting_worst}
+    f_{worst} = 15N + 7k - 3 \approx 15N + 7k = O(N + k)
+\end{equation}
+
+\subsection{Алгоритм итеративной быстрой сортировки}
+
+Трудоёмкость алгоритма итеративной быстрой сортировки \eqref{eq:qsort}:
+\begin{equation}
+    \label{eq:qsort}
+    T(N) = T(J) + T(N-J) + M(N)
+\end{equation}
+
+где
+
+\begin{enumerate}
+    \item $T(N)$ - трудоемкость быстрой сортировки массива размера N.
+    \item $T(J)$ - трудоемкость быстрой сортировки массива размера J.
+    \item $T(N-J)$ - трудоемкость быстрой сортировки массива размера N-J.
+    \item $M(N)$ - трудоёмкость разделения массива на две части.
+\end{enumerate}
+
+\textbf{Вычислим для лучшего случая:}
+\begin{itemize}
+    \item $T(N) = 2T(\frac{N}{2}) + C*N$ - трудоемкость быстрой сортировки массива размера N.
+    \begin{itemize}
+        \item $2T(\frac{N}{2})$ поскольку мы разделяем массив на 2 равные части
+        \item $C*N$ поскольку мы будем проходить все элементы массива на каждом уровне "дерева"
+    \end{itemize}
+    \item Следующий шаг - разделить дальше на 4 части (\eqref{eq:qfirst_eq} и \eqref{eq:qfirst_eq_2}):
+    \begin{equation}
+        \label{eq:qfirst_eq}
+        T(N) = 2(2*T(\frac{N}{4}) + C*N/2) + C*N
+    \end{equation}
+    \begin{equation}
+        \label{eq:qfirst_eq_2}
+        T(N) = 4T(\frac{N}{4}) + 2C*N
+    \end{equation}
+    \item В общем случае \eqref{eq:qmain_eq}:
+    \begin{equation}
+        \label{eq:qmain_eq}
+        T(N) = 2^k * T(N/(2^k)) + k*C*N
+    \end{equation}
+    \item Для лучшего случая - $N = 2^k$ - идеально распределенное дерево (отсюда следует, что $k = log_2(N)$) \eqref{eq:qk_eq}
+    \begin{equation}
+        \label{eq:qk_eq}
+        T(N) = 2^k * T(1) + k * C * (2^k)
+    \end{equation}
+    \item[$-$] Вычислим T(1) - трудоемкость при массиве длинной 1 - и C - трудоемкость разделения \eqref{eq:qconst}:
+    \begin{equation}
+        \label{eq:qconst}
+        T(1) = 6 + 1 * 9 = 15;
+        C = 12 + N / (2^k) * 8
+    \end{equation}
+    \item Полная сложность (при $k = log_2(N)$) \eqref{eq:qsort_best}:
+    \begin{equation}
+        \label{eq:qsort_best}
+        T(N) = 15N + log_2(N)*(12 + 8) = 15N + 20Nlog_2(N)
+    \end{equation}
+\end{itemize}
+
+\textbf{Теперь вычислим для худшего случая:}
+\begin{itemize}
+    \item $T(N) = T(N - 1) + C*N$ - трудоемкость быстрой сортировки массива размера N.
+    \begin{itemize}
+        \item $T(N - 1)$ поскольку мы разделяем массив на 2 неравные части: пустое множество и полное множество за исключением "середины"
+    \end{itemize}
+    \item Следующие шаги очевидны \eqref{eq:qwfirst_eq}, \eqref{eq:qwfirst_eq_2}:
+    \begin{equation}
+        \label{eq:qwfirst_eq}
+        T(N) = T(N-2) + C(N-1) + C*N =  T(N-2) + 2C*N - C
+    \end{equation}
+    \begin{equation}
+        \label{eq:qwfirst_eq_2}
+        T(N) = T(N-3) + 3C*N - 2C*N - C
+    \end{equation}
+    \item В общем случае \eqref{eq:qwmain_eq}:
+    \begin{equation}
+        \label{eq:qwmain_eq}
+        T(N) = T(N-k) + k*C*N - C(\frac{k(k-1)}{2})
+    \end{equation}
+    \item Для худшего случая - $N = k$ - нераспределенное дерево \eqref{eq:qwk_eq}:
+    \begin{equation}
+        \label{eq:qwk_eq}
+        T(N) = T(0) + N*C*N - C(\frac{N(N-1)}{2})
+    \end{equation}
+    \item[$-$] Вычислим параметры \eqref{eq:qwconst}:
+    \begin{equation}
+        \label{eq:qwconst}
+        T(0) = 1;
+        C = 12 + (N-k) * 8
+    \end{equation}
+    \item Полная сложность (при $N = k$) \eqref{eq:qsort_worst}:
+    \begin{equation}
+        \label{eq:qsort_worst}
+        T(N) = 1 + N*N*12 - 12*(\frac{N(N-1)}{2}) = 1 + 6N^2 + 6N
+    \end{equation}
+\end{itemize}
+
+Трудоёмкость в \textbf{лучшем} случае \eqref{eq:qsort_best_fin}:
+\begin{equation}
+    \label{eq:qsort_best_fin}
+    f_{best} = 15N + 20Nlog_2(N) \approx 20Nlog_2(N) = O(Nlog_2(N))
+\end{equation}
+
+Трудоёмкость в \textbf{худшем} случае \eqref{eq:qsort_worst_fin}:
+\begin{equation}
+    \label{eq:qsort_worst_fin}
+    f_{worst} = 1 + 6N^2 + 6N \approx 6N^2 = O(N^{2})
+\end{equation}
+\section{Вывод}
+
+На основе теоретических данных, полученных из аналитического раздела, были построены схемы трёх алгоритмов сортировки. Оценены их трудоёмкости в лучшем и худшем случаях.
 
 \clearpage
 
@@ -19,7 +244,7 @@
 \clearpage
 
 \includeimage
-{isort} % Имя файла без расширения (файл должен быть расположен в директории inc/img/)
+{csort} % Имя файла без расширения (файл должен быть расположен в директории inc/img/)
 {f} % Обтекание (без обтекания)
 {h} % Положение рисунка (см. figure из пакета float)
 {0.75\textwidth} % Ширина рисунка
