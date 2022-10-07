@@ -3,52 +3,45 @@ goos: linux
 goarch: amd64
 pkg: lab_03/levenshtein
 cpu: 11th Gen Intel(R) Core(TM) i5-11320H @ 3.20GHz
-BenchmarkLevenshteinIterative/size=10-4         	 1000000	      1201 ns/op
-BenchmarkLevenshteinIterative/size=15-4         	  604089	      2095 ns/op
-BenchmarkLevenshteinIterative/size=20-4         	  355712	      3583 ns/op
-BenchmarkLevenshteinIterative/size=25-4         	  249366	      4986 ns/op
-BenchmarkLevenshteinIterative/size=30-4         	  163378	      7290 ns/op
-BenchmarkLevenshteinIterative/size=35-4         	  122112	     10133 ns/op
-BenchmarkLevenshteinIterative/size=40-4         	   90572	     12663 ns/op
-BenchmarkLevenshteinIterative/size=45-4         	   82954	     15402 ns/op
-BenchmarkLevenshteinIterative/size=50-4         	   61676	     18283 ns/op
-BenchmarkLevenshteinIterative/size=55-4         	   54967	     21625 ns/op
-BenchmarkLevenshteinIterative/size=60-4         	   45108	     25615 ns/op
-BenchmarkLevenshteinIterative/size=65-4         	   36178	     31082 ns/op
-BenchmarkLevenshteinIterative/size=70-4         	   33734	     35899 ns/op
-BenchmarkLevenshteinIterative/size=75-4         	   29289	     40029 ns/op
-BenchmarkLevenshteinIterative/size=80-4         	   26121	     44861 ns/op
-BenchmarkLevenshteinIterative/size=85-4         	   21307	     49998 ns/op
-BenchmarkLevenshteinIterative/size=90-4         	   22670	     54312 ns/op
-BenchmarkLevenshteinIterative/size=95-4         	   19420	     59690 ns/op
-BenchmarkLevenshteinIterative/size=100-4        	   17605	     68866 ns/op
-BenchmarkLevenshteinIterative/size=105-4        	   16918	     73016 ns/op
-BenchmarkDL_CacheRecursive/size=10-4            	  565341	      2125 ns/op
-BenchmarkDL_CacheRecursive/size=15-4            	  285585	      4024 ns/op
-BenchmarkDL_CacheRecursive/size=20-4            	  151117	      7829 ns/op
-BenchmarkDL_CacheRecursive/size=25-4            	   98906	     12290 ns/op
-BenchmarkDL_CacheRecursive/size=30-4            	   69788	     16729 ns/op
-BenchmarkDL_CacheRecursive/size=35-4            	   51363	     23177 ns/op
-BenchmarkDL_CacheRecursive/size=40-4            	   39759	     32371 ns/op
-BenchmarkDL_CacheRecursive/size=45-4            	   29478	     41164 ns/op
-BenchmarkDL_CacheRecursive/size=50-4            	   24432	     49816 ns/op
-BenchmarkDL_CacheRecursive/size=55-4            	   19980	     60485 ns/op
-BenchmarkDL_CacheRecursive/size=60-4            	   17101	     70923 ns/op
-BenchmarkDL_CacheRecursive/size=65-4            	   13572	     84775 ns/op
-BenchmarkDL_CacheRecursive/size=70-4            	   12282	     96793 ns/op
-BenchmarkDL_CacheRecursive/size=75-4            	    8523	    117414 ns/op
-BenchmarkDL_CacheRecursive/size=80-4            	    9192	    134012 ns/op
-BenchmarkDL_CacheRecursive/size=85-4            	    7998	    139167 ns/op
-BenchmarkDL_CacheRecursive/size=90-4            	    6796	    162351 ns/op
-BenchmarkDL_CacheRecursive/size=95-4            	    6771	    179883 ns/op
-BenchmarkDL_CacheRecursive/size=100-4           	    5656	    194620 ns/op
-BenchmarkDL_CacheRecursive/size=105-4           	    5787	    215729 ns/op
-BenchmarkDL_Recursive/size=10-4                 	      22	  48367099 ns/op
-BenchmarkDL_Recursive/size=15-4                 	       1	268359837990 ns/op
-
-
-
-
-
-signal: interrupt
-FAIL	lab_03/levenshtein	351.410s
+BenchmarkDL_CacheRecursive/size=10-4         	   46768	     24741 ns/op	    2056 B/op	      54 allocs/op
+BenchmarkDL_CacheRecursive/size=15-4         	   45600	     28046 ns/op	    3208 B/op	      79 allocs/op
+BenchmarkDL_CacheRecursive/size=20-4         	   32496	     31273 ns/op	    5912 B/op	     105 allocs/op
+BenchmarkDL_CacheRecursive/size=25-4         	   30076	     38656 ns/op	    7912 B/op	     130 allocs/op
+BenchmarkDL_CacheRecursive/size=30-4         	   26629	     47998 ns/op	   10792 B/op	     155 allocs/op
+BenchmarkDL_CacheRecursive/size=35-4         	   21722	     60167 ns/op	   15208 B/op	     181 allocs/op
+BenchmarkDL_CacheRecursive/size=40-4         	   17518	     67163 ns/op	   19816 B/op	     206 allocs/op
+BenchmarkDL_CacheRecursive/size=45-4         	   15920	     90456 ns/op	   23560 B/op	     231 allocs/op
+BenchmarkDL_CacheRecursive/size=50-4         	   12830	     94589 ns/op	   27688 B/op	     256 allocs/op
+BenchmarkDL_CacheRecursive/size=55-4         	   10000	    100297 ns/op	   32232 B/op	     281 allocs/op
+BenchmarkDL_CacheRecursive/size=60-4         	   10000	    132568 ns/op	   39080 B/op	     306 allocs/op
+BenchmarkDL_CacheRecursive/size=65-4         	    8679	    129533 ns/op	   49640 B/op	     332 allocs/op
+BenchmarkDL_CacheRecursive/size=70-4         	    8481	    155817 ns/op	   53352 B/op	     357 allocs/op
+BenchmarkDL_CacheRecursive/size=75-4         	    7212	    179164 ns/op	   61928 B/op	     382 allocs/op
+BenchmarkDL_CacheRecursive/size=80-4         	    6254	    204233 ns/op	   71176 B/op	     407 allocs/op
+BenchmarkDL_CacheRecursive/size=85-4         	    5824	    238549 ns/op	   75688 B/op	     432 allocs/op
+BenchmarkDL_CacheRecursive/size=90-4         	    5474	    272641 ns/op	   86024 B/op	     457 allocs/op
+BenchmarkDL_CacheRecursive/size=95-4         	    4896	    255209 ns/op	   90856 B/op	     482 allocs/op
+BenchmarkDL_CacheRecursive/size=100-4        	    4210	    277725 ns/op	  108776 B/op	     507 allocs/op
+BenchmarkDL_CacheRecursive/size=105-4        	    4004	    295582 ns/op	  114408 B/op	     532 allocs/op
+BenchmarkDL_STD/size=10-4                    	   51151	     23439 ns/op	    2056 B/op	      54 allocs/op
+BenchmarkDL_STD/size=15-4                    	   52831	     26951 ns/op	    3208 B/op	      79 allocs/op
+BenchmarkDL_STD/size=20-4                    	   47319	     25761 ns/op	    5912 B/op	     105 allocs/op
+BenchmarkDL_STD/size=25-4                    	   42326	     33561 ns/op	    7912 B/op	     130 allocs/op
+BenchmarkDL_STD/size=30-4                    	   33669	     34599 ns/op	   10792 B/op	     155 allocs/op
+BenchmarkDL_STD/size=35-4                    	   31754	     41188 ns/op	   15208 B/op	     181 allocs/op
+BenchmarkDL_STD/size=40-4                    	   28159	     44194 ns/op	   19816 B/op	     206 allocs/op
+BenchmarkDL_STD/size=45-4                    	   28020	     45736 ns/op	   23560 B/op	     231 allocs/op
+BenchmarkDL_STD/size=50-4                    	   20511	     50620 ns/op	   27688 B/op	     256 allocs/op
+BenchmarkDL_STD/size=55-4                    	   19899	     56697 ns/op	   32232 B/op	     281 allocs/op
+BenchmarkDL_STD/size=60-4                    	   17382	     64857 ns/op	   39080 B/op	     306 allocs/op
+BenchmarkDL_STD/size=65-4                    	   16210	     74995 ns/op	   49640 B/op	     332 allocs/op
+BenchmarkDL_STD/size=70-4                    	   13496	     79366 ns/op	   53352 B/op	     357 allocs/op
+BenchmarkDL_STD/size=75-4                    	   13317	     86188 ns/op	   61928 B/op	     382 allocs/op
+BenchmarkDL_STD/size=80-4                    	   12396	     95349 ns/op	   71176 B/op	     407 allocs/op
+BenchmarkDL_STD/size=85-4                    	   10000	    116494 ns/op	   75688 B/op	     432 allocs/op
+BenchmarkDL_STD/size=90-4                    	   10000	    118900 ns/op	   86024 B/op	     457 allocs/op
+BenchmarkDL_STD/size=95-4                    	   10000	    127167 ns/op	   90856 B/op	     482 allocs/op
+BenchmarkDL_STD/size=100-4                   	    7717	    131599 ns/op	  108776 B/op	     507 allocs/op
+BenchmarkDL_STD/size=105-4                   	    9061	    162289 ns/op	  114408 B/op	     532 allocs/op
+PASS
+ok  	lab_03/levenshtein	66.378s

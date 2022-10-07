@@ -1,0 +1,59 @@
+\documentclass{bmstu}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{svg}
+\svgpath{{./inc/img/}}
+\usepackage{listings}
+
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\lstdefinestyle{go}{
+    language=Go,
+    backgroundcolor=\color{white},
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\color{cyan},
+    stringstyle=\color{green},
+    commentstyle=\color{gray},
+    numbers=left,
+    stepnumber=1,
+    numbersep=5pt,
+    frame=single,
+    tabsize=4,
+    captionpos=t,
+    breaklines=true,
+    breakatwhitespace=true,
+    escapeinside={\#*}{*)},
+    morecomment=[l][\color{magenta}]{\#},
+    columns=fullflexible
+}
+
+\bibliography{biblio}
+
+\begin{document}
+
+\makereporttitle{Информатика, искусственный интеллект и системы управления}
+{Программное обеспечение ЭВМ и информационные технологии}
+{лабораторной работе №~1}
+{Анализ Алгоитмов}
+{Расстояние Левенштейна и Дамерау-Левенштейна}
+{}
+{ИУ7-55Б}
+{Романов~С.~К.}
+{Волкова.~Л.~Л.}
+
+\tableofcontents
+
+\include{00-intro}
+
+\include{01-theoretical}
+\include{02-practical}
+\include{03-implementation}
+\include{04-research}
+
+\include{05-conclusion}
+%\include{03-appendix}
+
+\makebibliography
+
+\end{document}

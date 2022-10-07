@@ -1,0 +1,80 @@
+\chapter{Технологическая часть}
+
+В данном разделе приведены требования к программному обеспечению, средства реализации и листинги кода.
+
+\section{Требования к программному обеспечению}
+К программе предъявляется ряд условий:
+\begin{itemize}
+    \item[$-$] На вход подаются две строки в любой раскладке (в том числе и пустые);
+    \item[$-$] На выход ПО должно выводить полученное расстояние и вспомогательны матрицы;
+\end{itemize}
+
+\section{Средства реализации}
+Для реализации данной лабораторной работы необходимо установить следующее программное обеспечение:
+\begin{itemize}
+    \item \href{https://https://go.dev/}{Golang 1.19.1} - язык программирования
+    \item \href{https://github.com/cep21/benchdraw}{Benchdraw 0.1.0} - Средство визуализации данных
+    \item \href{https://www.latex-project.org/}{LaTeX} - система документооборота
+\end{itemize}
+
+\section{Листинги кода}
+В листингах \ref{lst:ld-std}, \ref{lst:ld-rec} и \ref{lst:ld-cacheRec} приведены реализации алгоритмов
+сортировки
+\begin{itemize}
+    \item[~---~] \("\)Итеративный метод поиска Дамерау-Левенштейна\("\);
+    \item[~---~] \("\)Рекурсивный метод поиска Дамерау-Левенштейна\("\);
+    \item[~---~] \("\)Рекурсивный с кешированием метод поиска Дамерау-Левенштейна\("\);
+\end{itemize}
+соответственно
+
+\subsection{Итеративный метод поиска Дамерау-Левенштейна}
+\lstinputlisting[caption={Итеративный метод поиска Дамерау-Левенштейна}, label={lst:ld-std}, language=go, style=go,
+firstline=6, lastline=36]{../../src/levenshtein/levenshtein.go}
+
+\subsection{Рекурсивный метод поиска Дамерау-Левенштейна}
+\lstinputlisting[caption={Рекурсивный метод поиска Дамерау-Левенштейна}, label={lst:ld-rec}, language=go, style=go,
+firstline=37, lastline=72]{../../src/levenshtein/levenshtein.go}
+
+\subsection{Рекурсивный с кешированием метод поиска Дамерау-Левенштейна}
+\lstinputlisting[caption={Рекурсивный с кешированием метод поиска Дамерау-Левенштейна}, label={lst:ld-cacheRec}, language=go, style=go,
+firstline=73, lastline=119]{../../src/levenshtein/levenshtein.go}
+
+\section{Тестовые данные}
+
+В таблице \ref{tab:o} приведены тестовые данные, на которых было протестированно разработанное ПО.
+
+\begin{table}[h]
+    \begin{center}
+        \caption{Таблица тестовых данных}
+        \label{tab:o}
+        ""\newline
+        \begin{tabular}{|c c c c c|}
+            \hline
+            № & Первое слово & Второе слово & Ожидаемый результат & Полученный результат \\ [0.8ex]
+            \hline
+            1 &  &  & 0 0 0 & 0 0 0\\
+            \hline
+            2 & kot & skat & 2 2 2 & 2 2 2\\
+            \hline
+            3 & kate & ktae & 1 1 1 & 1 1 1\\
+            \hline
+            4 & abacaba & aabcaab & 2 2 2 & 2 2 2\\
+            \hline
+            5 & sobaka & sboku & 3 3 3 & 3 3 3\\
+            \hline
+            6 & qwerty & queue & 4 4 4 & 4 4 4\\
+            \hline
+            7 & apple & aplpe & 1 1 1  & 1 1 1\\
+            \hline
+            8 &  & cat & 3 3 3 & 3 3 3\\
+            \hline
+            9 & parallels &  & 9 9 9 & 9 9 9\\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\section*{Вывод}
+
+В данном разделе были разработаны исходные коды трех алгоритмов:
+вычисления расстояния Дамерау-Левенштейна рекурсивно, с заполнением матрицы и рекурсивно с заполнением матрицы.
