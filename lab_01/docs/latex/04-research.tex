@@ -3,8 +3,8 @@
 
 \begin{itemize}
     \item Операционная система: Windows 11 используя Windows Subsystem for Linux 2 (WSL2) \cite{wsl2} Имитирующей Arch Linux \cite{arch} 64-bit.
-    \item Оперативная память: 16 GB.
-    \item Процессор: 11th Gen Intel(R) Core(TM) i5-11320H @ 3.20GHz \cite{i5}.
+    \item Оперативная память: 16 Гб.
+    \item Процессор: 11th Gen Intel(R) Core(TM) i5-11320H @ 3.20 ГГц \cite{i5}.
 \end{itemize}
 
 \section{Время выполнения алгоритмов}
@@ -13,7 +13,7 @@
 Количество повторов регулируется тестирующей системой самоятоятельно, хотя при желание оные можно задать.
 Точное количество повторов определяется в зависимости от того, был ли получен стабильный результат согласно системе.
 
-\lstinputlisting[style=go, caption={Пример бенчмарка}, label={lst:benchmark} , firstline=12, lastline=24]{../../src/levenshtein/levenshtein_test.go}
+\lstinputlisting[style=go, caption={Пример бенчмарка}, label={lst:benchmark} , firstline=102, lastline=117]{../../src/levenshtein/levenshtein_test.go}
 
 График времени выполнения алгоритмов на случайных данных (в наносекундах)\newline
 \includesvg[%

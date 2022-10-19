@@ -1,4 +1,4 @@
-module lab_03
+module lab_01
 
 go 1.19
 

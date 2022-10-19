@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/logrusorgru/aurora"
-	"lab_03/levenshtein"
+	"lab_01/levenshtein"
 )
 
 func main() {
