@@ -6,21 +6,21 @@ pub trait MatrixMultiplication {
 
 trait Misc
 {
-    fn precompute_rows(&self, csize: usize) -> Vec<i32>;
-    fn precompute_cols(&self, rsize: usize) -> Vec<i32>;
+    fn precompute_rows(&self) -> Vec<i32>;
+    fn precompute_cols(&self) -> Vec<i32>;
 
-    fn precompute_rows_imp(&self, csize: usize) -> Vec<i32>;
-    fn precompute_cols_imp(&self, rsize: usize) -> Vec<i32>;
+    fn precompute_rows_imp(&self) -> Vec<i32>;
+    fn precompute_cols_imp(&self) -> Vec<i32>;
 }
 
 impl Misc for Vec<Vec<i32>>
 {
-    fn precompute_rows(&self, csize: usize) -> Vec<i32>
+    fn precompute_rows(&self) -> Vec<i32>
     {
         let mut row_factor = vec![0; self.len()];
         for i in 0..self.len()
         {
-            for j in 0..((csize)/2)
+            for j in 0..((self[0].len() - 1)/2)
             {
                 row_factor[i] = row_factor[i] + self[i][j*2] * self[i][j*2 + 1];
             }
@@ -29,11 +29,11 @@ impl Misc for Vec<Vec<i32>>
         row_factor
     }
 
-    fn precompute_cols(&self, rsize: usize) -> Vec<i32> {
+    fn precompute_cols(&self) -> Vec<i32> {
         let mut col_factor = vec![0; self[0].len()];
         for i in 0..self[0].len()
         {
-            for j in 0..((rsize)/2)
+            for j in 0..((self.len() - 1)/2)
             {
                 col_factor[i] = col_factor[i] + self[j*2][i] * self[j*2 + 1][i];
             }
@@ -42,11 +42,11 @@ impl Misc for Vec<Vec<i32>>
         col_factor
     }
 
-    fn precompute_rows_imp(&self, csize: usize) -> Vec<i32> {
+    fn precompute_rows_imp(&self) -> Vec<i32> {
         let mut row_factor = vec![0; self.len()];
         for i in 0..self.len()
         {
-            for j in 0..((csize)/2)
+            for j in 0..((self[0].len() - 1)/2)
             {
                 row_factor[i] += self[i][j<<1] * self[i][(j<<1) + 1];
             }
@@ -55,11 +55,11 @@ impl Misc for Vec<Vec<i32>>
         row_factor
     }
 
-    fn precompute_cols_imp(&self, rsize: usize) -> Vec<i32> {
+    fn precompute_cols_imp(&self) -> Vec<i32> {
         let mut col_factor = vec![0; self[0].len()];
         for i in 0..self[0].len()
         {
-            for j in 0..((rsize)/2)
+            for j in 0..((self.len() - 1)/2)
             {
                 col_factor[i] += self[j<<1][i] * self[(j<<1) + 1][i];
             }
@@ -86,8 +86,8 @@ impl MatrixMultiplication for Vec<Vec<i32>> {
     fn winograd_mut(&self, m2: &Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         let mut result = vec![vec![0; m2[0].len()]; self.len()];
 
-        let row_factor = self.precompute_rows(m2.len());
-        let col_factor = m2.precompute_cols(self.len());
+        let row_factor = self.precompute_rows();
+        let col_factor = m2.precompute_cols();
 
         for i in 0..result.len()
         {
@@ -119,8 +119,8 @@ impl MatrixMultiplication for Vec<Vec<i32>> {
         let (a, b, c) = (self.len(), m2.len(), m2[0].len());
         let mut result = vec![vec![0; c]; a];
 
-        let row_factor = self.precompute_rows_imp(b);
-        let col_factor = m2.precompute_cols_imp(a);
+        let row_factor = self.precompute_rows_imp();
+        let col_factor = m2.precompute_cols_imp();
 
         for i in 0..a
         {
