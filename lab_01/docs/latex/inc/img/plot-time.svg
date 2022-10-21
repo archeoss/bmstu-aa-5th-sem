@@ -6,7 +6,7 @@
 	<g transform="scale(1, -1) translate(0, -745)">
 		<path d="M0,0L1490,0L1490,745L0,745Z" style="fill:#FFFFFF" />
 		<text x="762.75" y="-3.8613" transform="scale(1, -1)"
-			  style="font-family:Times;font-weight:normal;font-style:normal;font-size:16px">size</text>
+			  style="font-family:Times;font-weight:normal;font-style:normal;font-size:16px">Количество символов</text>
 		<text x="56.666" y="-15.602" transform="scale(1, -1)"
 			  style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">10</text>
 		<text x="131.45" y="-15.602" transform="scale(1, -1)"
@@ -48,15 +48,15 @@
 		<text x="1475" y="-15.602" transform="scale(1, -1)"
 			  style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">105</text>
 		<g transform="rotate(90)">
-			<text x="374.61" y="7.555" transform="scale(1, -1)"
-				  style="font-family:Times;font-weight:normal;font-style:normal;font-size:16px">ns/op</text>
+			<text x="324.61" y="7.555" transform="scale(1, -1)"
+				  style="font-family:Times;font-weight:normal;font-style:normal;font-size:16px">Время выполнения, мс</text>
 		</g>
 		<text x="12.416" y="-69.005" transform="scale(1, -1)"
-			  style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">40000</text>
+			  style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">0.04</text>
 		<text x="8.416" y="-384.18" transform="scale(1, -1)"
-			  style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">160000</text>
+			  style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">0.16</text>
 		<text x="8.416" y="-699.35" transform="scale(1, -1)"
-			  style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">280000</text>
+			  style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">0.28</text>
 		<path d="M47.916,73.727L55.916,73.727" style="fill:none;stroke:#000000;stroke-width:0.5" />
 		<path d="M47.916,388.9L55.916,388.9" style="fill:none;stroke:#000000;stroke-width:0.5" />
 		<path d="M47.916,704.07L55.916,704.07" style="fill:none;stroke:#000000;stroke-width:0.5" />
@@ -67,9 +67,9 @@
 		<path d="M61.666,30.23L136.45,39.455L211.23,36.329L286.01,56.815L360.79,59.542L435.57,76.847L510.35,84.742L585.13,88.792L659.91,101.62L734.69,117.58L809.47,139.01L884.25,165.64L959.03,177.12L1033.8,195.04L1108.6,219.1L1183.4,274.63L1258.2,280.95L1332.9,302.67L1407.7,314.31L1482.5,394.91" style="fill:none;stroke:#7AC36A" />
 		<path d="M1470,739.11L1490,739.11" style="fill:none;stroke:#F15A60" />
 		<text x="1239" y="-733.45" transform="scale(1, -1)"
-			  style="font-family:Times;font-weight:normal;font-style:normal;font-size:16px">[BenchmarkDL_CacheRecursive=]</text>
+			  style="font-family:Times;font-weight:normal;font-style:normal;font-size:16px">[Рекурсивный с кешем Дам.-Лев.]</text>
 		<path d="M1470,727.33L1490,727.33" style="fill:none;stroke:#7AC36A" />
-		<text x="1312.3" y="-721.67" transform="scale(1, -1)"
-			  style="font-family:Times;font-weight:normal;font-style:normal;font-size:16px">[BenchmarkDL_STD=]</text>
+		<text x="1282.3" y="-721.67" transform="scale(1, -1)"
+			  style="font-family:Times;font-weight:normal;font-style:normal;font-size:16px">[Итеративный Дам.-Лев.]</text>
 	</g>
 </svg>
