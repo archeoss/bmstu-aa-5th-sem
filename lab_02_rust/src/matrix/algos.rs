@@ -20,7 +20,7 @@ impl Misc for Vec<Vec<i32>>
         let mut row_factor = vec![0; self.len()];
         for i in 0..self.len()
         {
-            for j in 0..((self[0].len() - 1)/2)
+            for j in 0..((self[0].len())/2)
             {
                 row_factor[i] = row_factor[i] + self[i][j*2] * self[i][j*2 + 1];
             }
@@ -33,7 +33,7 @@ impl Misc for Vec<Vec<i32>>
         let mut col_factor = vec![0; self[0].len()];
         for i in 0..self[0].len()
         {
-            for j in 0..((self.len() - 1)/2)
+            for j in 0..((self.len())/2)
             {
                 col_factor[i] = col_factor[i] + self[j*2][i] * self[j*2 + 1][i];
             }
@@ -46,7 +46,7 @@ impl Misc for Vec<Vec<i32>>
         let mut row_factor = vec![0; self.len()];
         for i in 0..self.len()
         {
-            for j in 0..((self[0].len() - 1)/2)
+            for j in 0..((self[0].len())/2)
             {
                 row_factor[i] += self[i][j<<1] * self[i][(j<<1) + 1];
             }
@@ -59,7 +59,7 @@ impl Misc for Vec<Vec<i32>>
         let mut col_factor = vec![0; self[0].len()];
         for i in 0..self[0].len()
         {
-            for j in 0..((self.len() - 1)/2)
+            for j in 0..((self.len())/2)
             {
                 col_factor[i] += self[j<<1][i] * self[(j<<1) + 1][i];
             }

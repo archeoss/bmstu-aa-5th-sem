@@ -2,40 +2,53 @@
 Ниже приведены технические характеристики устройства, на котором было проведено тестирование ПО:
 
 \begin{itemize}
-    \item Операционная система: Windows 11 используя Windows Subsystem for Linux 2 (WSL2) \cite{wsl2} Имитирующей Arch Linux \cite{arch} 64-bit.
+    \item Операционная система: Arch Linux \cite{arch} 64-bit.
     \item Оперативная память: 16 Гб.
-    \item Процессор: 11th Gen Intel(R) Core(TM) i5-11320H @ 3.20 ГГц \cite{i5}.
+    \item Процессор: 11th Gen Intel^R Core^{TM} i5-11320H @ 3.20 ГГц \cite{i5}.
 \end{itemize}
 
+\section{Пример выполнения}
+\includesvg[%
+    width=18cm,height=15cm,inkscapelatex=false,
+%inkscapeformat=pdf,
+%  inkscapelatex=false,
+%  distort=true,
+%    angle=-12.5,
+%  extractdistort=false,
+%  extractangle=inherit,
+]{example}%
+\newpage
+
 \section{Время выполнения алгоритмов}
-Алгоритмы тестировались при помощи \("\)бенчмарков\("\) предоставляемых библиотекой Criterion.rs \cite{Criterion}.
-Пример такого \("\)бенчмарка\("\) приведен в листинге \ref{lst:benchmark}.
-Количество повторов обычно регулируется тестирующей системой самостоятельно, однако ввиду трудоемкости вычислений, количество повторов было ограничено до 20.
+Алгcaоритмы тестировались при помощи инструментов замера времени предоставляемых библиотекой Criterion.rs \cite{Criterion}.
+Пример функции по замеру времени приведен в листинге \ref{lst:benchmark}.
+Количество повторов регулируется тестирующей системой самостоятельно, однако ввиду трудоемкости вычислений, количество повторов было ограничено до 12.
 \lstinputlisting[language=Rust, style=rust, caption={Пример бенчмарка}, label={lst:benchmark} , firstline=7, lastline=30]{../../benches/bench.rs}
 % TODO: Графики, четные, нечетные
-%График времени выполнения алгоритмов на случайных данных (в секундах)\newline
-%\includesvg[%
-%    width=18cm,height=15cm,inkscapelatex=false,
-%%inkscapeformat=pdf,
-%%  inkscapelatex=false,
-%%  distort=true,
-%%    angle=-12.5,
-%%  extractdistort=false,
-%%  extractangle=inherit,
-%]{plot-time}%
 
-%График времени выполнения алгоритмов на четном данных (в секундах)\newline
-%\includesvg[%
-%    width=18cm,height=15cm,inkscapelatex=false,
-%%inkscapeformat=pdf,
-%%  inkscapelatex=false,
-%%  distort=true,
-%%    angle=-12.5,
-%%  extractdistort=false,
-%%  extractangle=inherit,
-%]{plot-time}%
+График, показывающий время перемножения матриц 3 методами (четный размер матриц)\newline
+\includesvg[%
+    width=18cm,height=15cm,inkscapelatex=false,
+%inkscapeformat=pdf,
+%  inkscapelatex=false,
+%  distort=true,
+%    angle=-12.5,
+%  extractdistort=false,
+%  extractangle=inherit,
+]{even-bench}%
+
+График, показывающий время перемножения матриц 3 методами (нечетный размер матриц)\newline
+\includesvg[%
+    width=18cm,height=15cm,inkscapelatex=false,
+%inkscapeformat=pdf,
+%  inkscapelatex=false,
+%  distort=true,
+%    angle=-12.5,
+%  extractdistort=false,
+%  extractangle=inherit,
+]{odd_bench}%
 
 % TODO: циферки
-\section{Вывод}
+\section*{Вывод}
 
-Реализация умножения матриц с помощью алгоритма Копперсмита$-$Винограда в среднем выполняется в 3.4 раза быстрее, чем умножение обычным способом. Но, не смотря на это, алгоритм матриц с предварительным транспонированием матрицы выполняется быстрее чем любой рассматриваемый алгоритм. Такой алгоритм выполняется быстрее 3.6 раза чем обычное умножение, в 1.5 раза быстрее чем алгоритм Копперсмита$-$Винограда и в 1.3 раза быстрее чем его оптимизированная версия. Можно сделать вывод, что это происходит из-за кэширования соседних элементов перемножаемых строк. Кроме этого, для такого алгоритма не нужна дополнительная память, и, следовательно, нет нужды в дополнительном времени для ее выделения.
+Время работы алгоритма Винограда незначительно меньше стандартного алгоритма умножения, однако при должной оптимизации есть возможность сильно лучше время выполнения.

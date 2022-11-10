@@ -17,5 +17,5 @@ colored = "2.0.0"
 rand = "0.8.4"
 
 [profile.bench.package.lab_02]
-opt-level = 0
 debug = false
+opt-level = 0
