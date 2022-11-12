@@ -1,8 +1,8 @@
 report:
-	pdflatex --shell-escape report.tex
-	biber report
-	pdflatex report.tex
-	pdflatex --shell-escape report.tex
+	pdflatex report
+	bibtex report
+	pdflatex report
+	pdflatex report
 	make clean
 
 clean:
