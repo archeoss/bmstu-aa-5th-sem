@@ -4,7 +4,7 @@
 \begin{itemize}
     \item Операционная система: Arch Linux \cite{arch} 64-bit.
     \item Оперативная память: 16 Гб.
-    \item Процессор: 11th Gen Intel\textsuperscript{\tiny\textregistered} Core\textsuperscript{\tiny\texttrademark} i5-11320H @ 3.20 ГГц \cite{i5}.
+    \item Процессор: 11th Gen Intel\textsuperscript{\tiny\textregistered} Core\textsuperscript{\tiny\texttrademark} i5-11320H @ 3.20 ГГц\cite{i5}.
 \end{itemize}
 
 \section{Пример выполнения}
@@ -17,8 +17,8 @@
 \clearpage
 
 \section{Время выполнения алгоритмов}
-Алгcaоритмы тестировались при помощи инструментов замера времени предоставляемых библиотекой Criterion.rs \cite{Criterion}.
-Пример функции по замеру времени приведен в листинге \ref{lst:benchmark}.
+Алгоритмы тестировались при помощи инструментов замера времени предоставляемых библиотекой Criterion.rs\cite{Criterion}.
+Пример функции по замеру времени приведен в листинге\ref{lst:benchmark}.
 Количество повторов регулируется тестирующей системой самостоятельно, однако ввиду трудоемкости вычислений, количество повторов было ограничено до 12.
 \lstinputlisting[language=Rust, style=rust, caption={Пример бенчмарка}, label={lst:benchmark} , firstline=7, lastline=30]{../../benches/bench.rs}
 

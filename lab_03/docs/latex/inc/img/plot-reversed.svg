@@ -6,47 +6,47 @@
 <g transform="scale(1, -1) translate(0, -820)">
 <path d="M0,0L1640,0L1640,820L0,820Z" style="fill:#FFFFFF" />
 <text x="846.5" y="-3.8613" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:12px">size</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:15px">Размер массива</text>
 <text x="74.166" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">100</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">100</text>
 <text x="184.76" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">200</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">200</text>
 <text x="295.36" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">300</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">300</text>
 <text x="405.95" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">400</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">400</text>
 <text x="516.55" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">500</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">500</text>
 <text x="627.14" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">600</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">600</text>
 <text x="737.74" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">700</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">700</text>
 <text x="848.33" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">800</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">800</text>
 <text x="958.93" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">900</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">900</text>
 <text x="1067" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">1000</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">1000</text>
 <text x="1177.8" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">1100</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">1100</text>
 <text x="1288.2" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">1200</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">1200</text>
 <text x="1398.8" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">1300</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">1300</text>
 <text x="1509.4" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">1400</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">1400</text>
 <text x="1620" y="-15.602" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">1500</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">1500</text>
 <g transform="rotate(90)">
 <text x="412.11" y="11.555" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:12px">ns/op</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:15px">Время выполнения, мс</text>
 </g>
 <text x="20.416" y="-169.31" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">250000.00</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">250</text>
 <text x="20.416" y="-457.41" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">750000.00</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">750</text>
 <text x="15.416" y="-745.52" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:10px">1250000.00</text>
+	style="font-family:Times;font-weight:normal;font-style:normal;font-size:14px">1250</text>
 <path d="M65.416,174.03L73.416,174.03" style="fill:none;stroke:#000000;stroke-width:0.5" />
 <path d="M65.416,462.14L73.416,462.14" style="fill:none;stroke:#000000;stroke-width:0.5" />
 <path d="M65.416,750.25L73.416,750.25" style="fill:none;stroke:#000000;stroke-width:0.5" />
@@ -66,13 +66,13 @@
 <path d="M81.666,30.23L192.26,30.454L302.86,30.779L413.45,30.934L524.05,31.229L634.64,31.283L745.24,31.689L855.83,31.829L966.43,32.224L1077,32.268L1187.6,32.377L1298.2,32.658L1408.8,33.019L1519.4,33.313L1630,34.271" style="fill:none;stroke:#7AC36A" />
 <path d="M81.666,33.151L192.26,43.388L302.86,59.891L413.45,82.772L524.05,112.7L634.64,149.37L745.24,194.57L855.83,246.64L966.43,305.36L1077,369.28L1187.6,459.54L1298.2,522.99L1408.8,609.24L1519.4,721.07L1630,820" style="fill:none;stroke:#5A9BD4" />
 <path d="M1620,814.11L1640,814.11" style="fill:none;stroke:#F15A60" />
-<text x="1455" y="-808.45" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:12px">[BenchmarkQuicksortReversed=]</text>
-<path d="M1620,802.33L1640,802.33" style="fill:none;stroke:#7AC36A" />
-<text x="1437.6" y="-796.67" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:12px">[BenchmarkCountingSortReversed=]</text>
-<path d="M1620,790.56L1640,790.56" style="fill:none;stroke:#5A9BD4" />
-<text x="1447.6" y="-784.89" transform="scale(1, -1)"
-	style="font-family:Times;font-weight:normal;font-style:normal;font-size:12px">[BenchmarkBubbleSortReversed=]</text>
+	<text x="1540.9" y="-808.45" transform="scale(1, -1)"
+		  style="font-family:Times;font-weight:normal;font-style:normal;font-size:16px">[Quicksort]</text>
+	<path d="M1620,802.33L1640,802.33" style="fill:none;stroke:#7AC36A" />
+	<text x="1515.6" y="-794.67" transform="scale(1, -1)"
+		  style="font-family:Times;font-weight:normal;font-style:normal;font-size:16px">[Counting Sort]</text>
+	<path d="M1620,790.56L1640,790.56" style="fill:none;stroke:#5A9BD4" />
+	<text x="1526.6" y="-780.89" transform="scale(1, -1)"
+		  style="font-family:Times;font-weight:normal;font-style:normal;font-size:16px">[Bubble Sort]</text>
 </g>
 </svg>

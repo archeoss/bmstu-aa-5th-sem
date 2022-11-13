@@ -1,12 +1,17 @@
 \documentclass{bmstu}
 \usepackage{algorithm}
+\usepackage{textcomp}
 \usepackage{algpseudocode}
 \usepackage{svg}
 \svgpath{{./inc/img/}}
 \usepackage{listings}
-\usepackage{amsmath}
 
 \usepackage{xcolor}
+\usepackage[para,online,flushleft]{threeparttable}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
 \lstdefinestyle{go}{
     language=Go,
     backgroundcolor=\color{white},
@@ -30,16 +35,44 @@
 \bibliography{biblio}
 
 \begin{document}
+    \begin{titlepage}
+        \newgeometry{pdftex, left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+        \fontsize{12pt}{12pt}\selectfont
+        \noindent \begin{minipage}{0.15\textwidth}
+                      \includegraphics[width=\linewidth]{inc/img/b_logo.jpg}
+        \end{minipage}
+        \noindent\begin{minipage}{0.9\textwidth}\centering
+        \textbf{Министерство науки и высшего образования Российской Федерации}\\
+        \textbf{Федеральное государственное бюджетное образовательное учреждение высшего образования}\\
+        \textbf{«Московский государственный технический университет имени Н.Э.~Баумана}\\
+        \textbf{(национальный исследовательский университет)»}\\
+        \textbf{(МГТУ им. Н.Э.~Баумана)}
+        \end{minipage}
 
-\makereporttitle{Информатика, искусственный интеллект и системы управления}
-{Программное обеспечение ЭВМ и информационные технологии}
-{лабораторной работе №~3}
-{Анализ Алгоитмов}
-{Трудоемкость сортировок}
-{}
-{ИУ7-55Б}
-{Романов~С.~К.}
-{Волкова.~Л.~Л.}
+        \noindent\rule{18cm}{3pt}
+        \newline\newline
+        \noindent ФАКУЛЬТЕТ $\underline{\text{«Информатика и системы управления»~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$ \newline\newline
+        \noindent КАФЕДРА $\underline{\text{«Программное обеспечение ЭВМ и информационные технологии»~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline\newline\newline\newline\newline\newline
+
+
+        \begin{center}
+            \Large\textbf{Отчет по лабораторной работе №3}
+            \Large\textbf{по курсу "Анализ алгоритмов"}
+        \end{center}
+
+        \noindent\textbf{Тема} $\underline{\text{~~Трудоемкость сортировок~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline\newline
+        \noindent\textbf{Студент} $\underline{\text{~~Романов С.К.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline
+        \noindent\textbf{Группа} $\underline{\text{~~ИУ7-55Б~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline
+        \noindent\textbf{Оценка (баллы)} $\underline{\text{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline
+        \noindent\textbf{Преподаватели} $\underline{\text{~~Волкова Л.Л., Строганов Ю.В.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline
+
+        \begin{center}
+            \vfill
+            Москва~---~\the\year
+            ~г.
+        \end{center}
+        \restoregeometry
+    \end{titlepage}
 
 \tableofcontents
 
@@ -49,7 +82,7 @@
 \include{02-practical}
 \include{03-implementation}
 \include{04-research}
-
+%
 \include{05-conclusion}
 %\include{03-appendix}
 

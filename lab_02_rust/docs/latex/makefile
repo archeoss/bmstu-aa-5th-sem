@@ -1,4 +1,4 @@
-../report.pdf: report.tex
+report:
 	pdflatex report
 	biber report
 	#bibtex report
