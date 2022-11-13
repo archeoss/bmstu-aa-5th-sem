@@ -51,74 +51,81 @@ firstline=45, lastline=69]{../../src/matrix/algos.rs}
 В таблице~\ref{tabular:test_rec} приведены тесты для функций, реализующих стандартный алгоритм умножения матриц, алгоритм Винограда и оптимизированный алгоритм Винограда. Все тесты пройдены успешно.
 
 \begin{table}[h!]
-    \begin{left}
-        \caption{\label{tabular:test_rec} Тестирование функций}
-        \begin{tabular}{c@{\hspace{7mm}}c@{\hspace{7mm}}c@{\hspace{7mm}}c@{\hspace{7mm}}c@{\hspace{7mm}}c@{\hspace{7mm}}}
-            \hline
-            Первая матрица & Вторая матрица & Ожидаемый результат \\ \hline
-            \vspace{4mm}
-            $\begin{pmatrix}
-                 1 & 2 & 3\\
-                 1 & 2 & 3\\
-                 1 & 2 & 3
-            \end{pmatrix}$ &
-            $\begin{pmatrix}
-                 1 & 2 & 3\\
-                 1 & 2 & 3\\
-                 1 & 2 & 3
-            \end{pmatrix}$ &
-            $\begin{pmatrix}
-                 6 & 12 & 18\\
-                 6 & 12 & 18\\
-                 6 & 12 & 18
-            \end{pmatrix}$ \\
-            \vspace{2mm}
-            \vspace{2mm}
-            $\begin{pmatrix}
-                 1 & 2 & 2\\
-                 1 & 2 & 2
-            \end{pmatrix}$ &
-            $\begin{pmatrix}
-                 1 & 2\\
-                 1 & 2\\
-                 1 & 2
-            \end{pmatrix}$ &
-            $\begin{pmatrix}
-                 5 & 10\\
-                 5 & 10
-            \end{pmatrix}$ \\
-            \vspace{2mm}
-            \vspace{2mm}
-            $\begin{pmatrix}
-                 2
-            \end{pmatrix}$ &
-            $\begin{pmatrix}
-                 2
-            \end{pmatrix}$ &
-            $\begin{pmatrix}
-                 4
-            \end{pmatrix}$ \\
-            \vspace{2mm}
-            \vspace{2mm}
-            $\begin{pmatrix}
-                 1 & -2 & 3\\
-                 1 & 2 & 3\\
-                 1 & 2 & 3
-            \end{pmatrix}$ &
-            $\begin{pmatrix}
-                 -1 & 2 & 3\\
-                 1 & 2 & 3\\
-                 1 & 2 & 3
-            \end{pmatrix}$ &
-            $\begin{pmatrix}
-                 0 & 4 & 6\\
-                 4 & 12 & 18\\
-                 4 & 12 & 18
-            \end{pmatrix}$\\
-            \vspace{2mm}
-            \vspace{2mm}
-        \end{tabular}
-    \end{left}
+    \begin{center}
+        \begin{threeparttable}
+            \captionsetup{justification=raggedright,singlelinecheck=off}
+            \caption{\label{tabular:test_rec} Тестирование функций}
+            \begin{tabular}{|c|c|c|c|c|c|}
+                \hline
+                Первая матрица & Вторая матрица & Ожидаемый результат \\ \hline
+    %            \vspace{4mm}
+                $\begin{pmatrix}
+                     1 & 2 & 3\\
+                     1 & 2 & 3\\
+                     1 & 2 & 3
+                \end{pmatrix}$ &
+                $\begin{pmatrix}
+                     1 & 2 & 3\\
+                     1 & 2 & 3\\
+                     1 & 2 & 3
+                \end{pmatrix}$ &
+                $\begin{pmatrix}
+                     6 & 12 & 18\\
+                     6 & 12 & 18\\
+                     6 & 12 & 18
+                \end{pmatrix}$ \\
+    %            \vspace{2mm}
+                \hline
+    %            \vspace{2mm}
+                $\begin{pmatrix}
+                     1 & 2 & 2\\
+                     1 & 2 & 2
+                \end{pmatrix}$ &
+                $\begin{pmatrix}
+                     1 & 2\\
+                     1 & 2\\
+                     1 & 2
+                \end{pmatrix}$ &
+                $\begin{pmatrix}
+                     5 & 10\\
+                     5 & 10
+                \end{pmatrix}$ \\
+    %            \vspace{2mm}
+                \hline
+    %            \vspace{2mm}
+                $\begin{pmatrix}
+                     2
+                \end{pmatrix}$ &
+                $\begin{pmatrix}
+                     2
+                \end{pmatrix}$ &
+                $\begin{pmatrix}
+                     4
+                \end{pmatrix}$ \\
+    %            \vspace{2mm}
+                \hline
+    %            \vspace{2mm}
+                $\begin{pmatrix}
+                     1 & -2 & 3\\
+                     1 & 2 & 3\\
+                     1 & 2 & 3
+                \end{pmatrix}$ &
+                $\begin{pmatrix}
+                     -1 & 2 & 3\\
+                     1 & 2 & 3\\
+                     1 & 2 & 3
+                \end{pmatrix}$ &
+                $\begin{pmatrix}
+                     0 & 4 & 6\\
+                     4 & 12 & 18\\
+                     4 & 12 & 18
+                \end{pmatrix}$\\
+    %            \vspace{2mm}
+                \hline
+    %            \vspace{2mm}
+            \end{tabular}
+        \end{threeparttable}
+    \end{center}
 \end{table}
 
 \section*{Вывод}
