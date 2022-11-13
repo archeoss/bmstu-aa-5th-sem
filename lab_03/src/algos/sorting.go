@@ -1,6 +1,9 @@
 package algos
 
-import "golang.org/x/exp/constraints"
+import (
+	"fmt"
+	"golang.org/x/exp/constraints"
+)
 
 func partition[T constraints.Ordered](arr []T, left int, right int) int {
 	pivot := arr[right]
@@ -38,22 +41,29 @@ func Quicksort[T constraints.Ordered](array []T) {
 }
 
 func CountingSort(array []int) {
+	minVal := array[0]
 	maxVal := array[0]
 	for _, val := range array {
 		if val > maxVal {
 			maxVal = val
 		}
+		if val < minVal {
+			minVal = val
+		}
 	}
-	temp := make([]int, maxVal+1)
+
+	temp := make([]int, maxVal+1-minVal)
+	fmt.Println(len(temp))
 	for _, val := range array {
-		temp[val]++
+		fmt.Println(val - minVal)
+		temp[val-minVal]++
 	}
 
 	j, i := 0, 0
 
 	for i < len(temp) && j < len(array) {
 		if temp[i] > 0 {
-			array[j] = i
+			array[j] = i + minVal
 			j++
 			temp[i]--
 		} else {
