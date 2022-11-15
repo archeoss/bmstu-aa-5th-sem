@@ -18,9 +18,9 @@
 
 \section{Время выполнения алгоритмов}
 Алгоритмы тестировались при помощи инструментов замера времени предоставляемых библиотекой Criterion.rs\cite{Criterion}.
-Пример функции по замеру времени приведен в листинге\ref{lst:benchmark}.
+Пример функции по замеру времени приведен в листинге \ref{lst:benchmark}.
 Количество повторов регулируется тестирующей системой самостоятельно, однако ввиду трудоемкости вычислений, количество повторов было ограничено до 12.
-\lstinputlisting[language=Rust, style=rust, caption={Пример бенчмарка}, label={lst:benchmark} , firstline=7, lastline=30]{../../benches/bench.rs}
+\lstinputlisting[language=Rust, style=rust, caption={Пример функции замера времени}, label={lst:benchmark} , firstline=7, lastline=30]{../../benches/bench.rs}
 
 \newpage
 График, показывающий время перемножения матриц 3 методами (четный размер матриц)\newline

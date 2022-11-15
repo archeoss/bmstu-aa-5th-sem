@@ -1,12 +1,8 @@
 use colored::Colorize;
-// use util::{read_data, PrintMatrix};
-// use algos::*;
 use lab_02::matrix::util::{read_data, PrintMatrix};
 use lab_02::matrix::algos::*;
 fn main() {
     let (m1,m2) = read_data();
-    // m1.print();
-    // m2.print();
 
     let naive = m1.naive_mut(&m2);
     let winograd = m1.winograd_mut(&m2);

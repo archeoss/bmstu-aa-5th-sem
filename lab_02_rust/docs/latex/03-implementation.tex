@@ -7,6 +7,7 @@
 \begin{itemize}
     \item[$-$] На вход подается 3 числа (A, B, C), определяющие размеры матриц, а также сами матрицы размерами AxB и BxC;
     \item[$-$] На выход ПО должно выводить результат перемножения 2 матриц;
+    \item[$-$] ПО должно быть написано на языке Rust;
 \end{itemize}
 
 \section{Средства реализации}
@@ -17,8 +18,8 @@
     \item \href{https://www.latex-project.org/}{LaTeX} - система документооборота
 \end{itemize}
 
-\section{Листинги кода}
-В следующих листингах представлены следующие алгоритмы
+\section{Реализация алгоритмов}
+В следующих листингах представлены следующие алгоритмы:
 \begin{itemize}
     \item[1.] В листинге \ref{lst:naive-mut} представлен классический алгоритм перемножения матриц
     \item[2.] В листингах \ref{lst:winograd0} и \ref{lst:winograd1} представлены алгоритм перемножения матриц с использованием алгоритма Копперсмита$-$Винограда
@@ -37,15 +38,17 @@ firstline=73, lastline=81]{../../src/matrix/algos.rs}
 
 \lstinputlisting[caption={Алгоритм перемножения матриц Копперсмита$-$Винограда}, label={lst:winograd0}, language=Rust, style=rust,
 firstline=86, lastline=116]{../../src/matrix/algos.rs}
+\newpage
 \lstinputlisting[caption={Алгоритм перемножения матриц Копперсмита$-$Винограда, вычисление векторов}, label={lst:winograd1}, language=Rust, style=rust,
 firstline=18, lastline=43]{../../src/matrix/algos.rs}
-
+\newpage
 \subsection{Оптимизированный алгоритм перемножения матриц Копперсмита$-$Винограда}
 \lstinputlisting[caption={Оптимизированный алгоритм перемножения матриц Копперсмита$-$Винограда}, label={lst:winograd_imp0}, language=Rust, style=rust,
 firstline=118, lastline=149]{../../src/matrix/algos.rs}
+\newpage
 \lstinputlisting[caption={Оптимизированный алгоритм перемножения матриц Копперсмита$-$Винограда, вычисление векторов}, label={lst:winograd_imp1}, language=Rust, style=rust,
 firstline=45, lastline=69]{../../src/matrix/algos.rs}
-
+\newpage
 \section{Тестовые данные}
 
 В таблице~\ref{tabular:test_rec} приведены тесты для функций, реализующих стандартный алгоритм умножения матриц, алгоритм Винограда и оптимизированный алгоритм Винограда. Все тесты пройдены успешно.
