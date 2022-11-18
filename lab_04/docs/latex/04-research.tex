@@ -1,0 +1,63 @@
+\chapter{Исследовательская часть}
+Ниже приведены технические характеристики устройства, на котором было проведено тестирование ПО:
+
+\begin{itemize}
+    \item Операционная система: Arch Linux \cite{arch} 64-bit.
+    \item Оперативная память: 16 Гб.
+    \item Процессор: 11th Gen Intel\textsuperscript{\tiny\textregistered} Core\textsuperscript{\tiny\texttrademark} i5-11320H @ 3.20 ГГц\cite{i5}.
+\end{itemize}
+
+\section{Пример выполнения}
+\includeimage
+{example} % Имя файла без расширения (файл должен быть расположен в директории inc/img/)
+{f} % Обтекание (без обтекания)
+{h} % Положение рисунка (см. figure из пакета float)
+{0.75\textwidth} % Ширина рисунка
+{Пример выполнения программы} % Подпись рисунка
+\clearpage
+
+\section{Время выполнения алгоритмов}
+Алгоритмы тестировались при помощи инструментов замера времени предоставляемых библиотекой Criterion.rs\cite{Criterion}.
+Пример функции по замеру времени приведен в листинге \ref{lst:benchmark}.
+Количество повторов регулируется тестирующей системой самостоятельно, однако ввиду трудоемкости вычислений, количество повторов было ограничено до 12.
+\lstinputlisting[language=Rust, style=rust, caption={Пример функции замера времени}, label={lst:benchmark} , firstline=7, lastline=30]{../../benches/bench.rs}
+
+\newpage
+График, показывающий время перемножения матриц 3 методами (четный размер матриц)\newline
+%\includesvg[%
+%    width=18cm,height=15cm,inkscapelatex=false,
+%%inkscapeformat=pdf,
+%%  inkscapelatex=false,
+%%  distort=true,
+%%    angle=-12.5,
+%%  extractdistort=false,
+%%  extractangle=inherit,
+%]{even-bench.svg}%
+\includeimage
+{even_bench} % Имя файла без расширения (файл должен быть расположен в директории inc/img/)
+{f} % Обтекание (без обтекания)
+{h} % Положение рисунка (см. figure из пакета float)
+{1\textwidth} % Ширина рисунка
+{График зависимости времени выполнеия от размера выполнения, четный размер} % Подпись рисунка
+\newpage
+
+График, показывающий время перемножения матриц 3 методами (нечетный размер матриц)\newline
+%\includesvg[%
+%    width=18cm,height=15cm,inkscapelatex=false,
+%%inkscapeformat=pdf,
+%%  inkscapelatex=false,
+%%  distort=true,
+%%    angle=-12.5,
+%%  extractdistort=false,
+%%  extractangle=inherit,
+%]{odd-bench.svg}%
+\includeimage
+{odd_bench} % Имя файла без расширения (файл должен быть расположен в директории inc/img/)
+{f} % Обтекание (без обтекания)
+{h} % Положение рисунка (см. figure из пакета float)
+{1\textwidth} % Ширина рисунка
+{График зависимости времени выполнеия от размера выполнения, нечетный размер} % Подпись рисунка
+
+\section*{Вывод}
+
+Время работы алгоритма Винограда незначительно меньше стандартного алгоритма умножения, однако при должной оптимизации есть возможность сильно лучше время выполнения.
