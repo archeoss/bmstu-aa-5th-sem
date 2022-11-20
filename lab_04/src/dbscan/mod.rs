@@ -1,2 +1,4 @@
-pub mod algos;
-pub mod util;
+pub mod dataset;
+pub mod model;
+pub mod plotter;
+pub mod utils;

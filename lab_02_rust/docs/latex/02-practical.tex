@@ -194,33 +194,33 @@
 
 Трудоёмкость улучшенного алгоритма Копперсмита — Винограда состоит из:
 \begin{enumerate}
-    \item Создания векторов rows и cols (\ref{for:impr_init}):
+    \item Создания векторов rows и cols \eqref{for:impr_init}.
     \begin{equation}
         \label{for:impr_init}
         f_{init} = A + C;
     \end{equation}
 
-    \item Заполнения вектора rows (\ref{for:impr_MH}):
+    \item Заполнения вектора rows \eqref{for:impr_MH}.
     \begin{equation}
-        \label{for:impr_MH}
+        \label{eq:impr_MH}
         f_{rows} = 2 + \frac{B}{2} \cdot (4 + 8A);
     \end{equation}
 
-    \item Заполнения вектора cols (\ref{for:impr_MV}):
+    \item Заполнения вектора cols \eqref{eq:impr_MV}.
     \begin{equation}
-        \label{for:impr_MV}
+        \label{eq:impr_MV}
         f_{cols} = 2 + \frac{B}{2} \cdot (4 + 8A);
     \end{equation}
 
-    \item Цикла заполнения матрицы для чётных размеров (\ref{for:impr_cycle}):
+    \item Цикла заполнения матрицы для чётных размеров \eqref{for:impr_cycle}.
     \begin{equation}
-        \label{for:impr_cycle}
+        \label{eq:impr_cycle}
         f_{cycle} = 2 + A \cdot (4 + C \cdot (8 + 9B))
     \end{equation}
 
-    \item Цикла, для дополнения умножения суммой последних нечётных строки и столбца, если общий размер нечётный (\ref{for:impr_last}):
+    \item Цикла, для дополнения умножения суммой последних нечётных строки и столбца, если общий размер нечётный \eqref{for:impr_last}.
     \begin{equation}
-        \label{for:impr_last}
+        \label{eq:impr_last}
         f_{last} =
         \begin{cases}
             2, & \text{чётная,}\\
@@ -229,17 +229,18 @@
     \end{equation}
 \end{enumerate}
 
-Итого, для худшего случая (нечётный общий размер матриц) имеем (\ref{for:bad_impr}):
+Итого, для худшего случая (нечётный общий размер матриц) имеем \eqref{eq:bad_impr}.
 \begin{equation}
-    \label{for:bad_impr}
+    \label{eq:bad_impr}
     f = A + C + 10 + 4B + 4BC + 4BA + 8A + 20AC + 9ABC \approx 9ABC
 \end{equation}
 
-Для лучшего случая (чётный общий размер матриц) имеем (\ref{for:good_impr}):
+Для лучшего случая (чётный общий размер матриц) имеем \eqref{eq:good_impr}.
 \begin{equation}
-    \label{for:good_impr}
+    \label{eq:good_impr}
     f = A + C + 8 + 4B +4BC + 4BA + 4A + 8AC + 9ABC \approx 9ABC
 \end{equation}
 
 \section*{Вывод}
-На основе теоретических данных, полученных из аналитического раздела, были построены схемы обоих алгоритмов умножения матриц.  Оценены их трудоёмкости в лучшем и худшем случаях.
+На основе теоретических данных, полученных из аналитического раздела, были построены схемы обоих алгоритмов умножения матриц.
+Оценены их трудоёмкости в лучшем и худшем случаях.
