@@ -1,7 +1,7 @@
 use csv::ReaderBuilder;
 use std::fs::File;
 
-#[derive(Default, Debug)]
+#[derive(Default, Debug, Clone)]
 pub struct Dataset {
     data: Vec<Vec<f64>>,
     labels: Vec<String>,
@@ -19,6 +19,7 @@ impl Dataset {
         let mut dataset = Dataset::default();
         let mut reader = ReaderBuilder::new().delimiter(delimiter).from_reader(file);
 
+        println!("{}, {:?}", reader.headers().unwrap().len(), reader.headers().unwrap());
         if *cols_to_read.iter().max().unwrap() >= reader.headers().unwrap().len() {
             panic!("Maximum index column to read is greater then number of columns");
         }
@@ -69,6 +70,10 @@ impl Dataset {
         &self.data
     }
 
+    pub fn get_data_mut(&mut self) -> &mut Vec<Vec<f64>> {
+        &mut self.data
+    }
+
     pub fn get_labels(&self) -> &Vec<String> {
         &self.labels
     }
@@ -85,12 +90,17 @@ impl Dataset {
         }
     }
 
-    pub(crate) fn query_neighbors(&self, index: usize, eps: f64, col_a: usize, col_b: usize) -> Vec<usize> {
+    pub(crate) fn query_neighbors(
+        &self,
+        index: usize,
+        eps: f64,
+        focus: (usize, usize)
+    ) -> Vec<usize> {
         let mut neighbors: Vec<usize> = vec![];
         let data = self.get_data();
         for i in 0..self.records_amount() {
-            let mut s = (data[col_b][i] - data[col_b][index]).powi(2);
-            s += (data[col_a][i] - data[col_a][index]).powi(2);
+            let mut s = (data[focus.1][i] - data[focus.1][index]).powi(2);
+            s += (data[focus.0][i] - data[focus.0][index]).powi(2);
             s = s.sqrt();
             if s <= eps {
                 neighbors.push(i);

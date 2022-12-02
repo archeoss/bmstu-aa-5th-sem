@@ -18,6 +18,8 @@ rand = "0.8.4"
 csv = "1.1.6"
 plotters = "0.3.4"
 rfd = "0.10.0"
+crossbeam = "0.8.2"
+itertools = "0.10.5"
 
 [profile.bench.package.lab_04]
 debug = false

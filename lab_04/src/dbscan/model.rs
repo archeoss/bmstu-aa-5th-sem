@@ -1,24 +1,30 @@
 pub use crate::dbscan::dataset::Dataset;
 use colored::Colorize;
+use std::sync::{Arc, Mutex};
+use super::utils::Focus;
 
+#[derive(Debug, Clone)]
 pub struct Model {
-    dataset: Dataset,
+    dataset: Arc<Mutex<Dataset>>,
     eps: f64,
     min_pts: usize,
     clusters: Vec<(Vec<Vec<usize>>, usize, usize)>,
     visited: Vec<bool>,
     noises: Vec<usize>,
+    focus: Focus
 }
 
 impl Model {
-    pub fn new(dataset: Dataset) -> Model {
+    pub fn new(dataset: Arc<Mutex<Dataset>>) -> Model {
+        let amount = dataset.lock().unwrap().records_amount();
         Model {
             eps: 0.0,
             min_pts: 0,
             clusters: vec![],
-            visited: vec![false; dataset.records_amount()],
+            visited: vec![false; amount],
             noises: vec![],
             dataset,
+            focus: Focus::default()
         }
     }
 
@@ -38,7 +44,7 @@ impl Model {
             "{}",
             format!(
                 "Input min_pts (Recommended: {}):",
-                self.dataset.labels_amount() * 2
+                self.dataset.lock().unwrap().labels_amount() * 2
             )
             .yellow()
         );
@@ -56,8 +62,8 @@ impl Model {
         &self.clusters
     }
 
-    pub fn get_dataset(&self) -> &Dataset {
-        &self.dataset
+    pub fn get_dataset(&self) -> Arc<Mutex<Dataset>> {
+        self.dataset.clone()
     }
 
     pub fn get_eps(&self) -> f64 {
@@ -69,22 +75,27 @@ impl Model {
     }
 
     pub fn run(&mut self) {
-        let len = self.dataset.labels_amount();
+        let len = self.dataset.lock().unwrap().labels_amount();
         for col_a in 0..len {
             for col_b in col_a + 1..len {
-                self.visited = vec![false; self.dataset.records_amount()];
+                self.focus = Focus(col_a, col_b);
+                self.visited = vec![false; self.dataset.lock().unwrap().records_amount()];
                 self.clusters.push((vec![], col_a, col_b));
                 for i in 0..self.visited.len() {
                     if self.visited[i] {
                         continue;
                     }
                     self.visited[i] = true;
-                    let mut neighbors = self.dataset.query_neighbors(i, self.eps, col_a, col_b);
+                    let mut neighbors = self
+                        .dataset
+                        .lock()
+                        .unwrap()
+                        .query_neighbors(i, self.eps, self.focus.clone().into());
 
                     if neighbors.len() < self.min_pts {
                         self.noises.push(i);
                     } else {
-                        self.expand_cluster(i, &mut neighbors, col_a, col_b);
+                        self.expand_cluster(i, &mut neighbors);
                     }
                 }
             }
@@ -94,9 +105,7 @@ impl Model {
     fn expand_cluster(
         &mut self,
         index: usize,
-        neighbors: &mut Vec<usize>,
-        col_a: usize,
-        col_b: usize,
+        neighbors: &mut Vec<usize>
     ) {
         let n = self.clusters.len() - 1;
         self.clusters[n].0.push(vec![index]);
@@ -105,7 +114,11 @@ impl Model {
             let k = neighbors.pop().unwrap();
             if !self.visited[k] {
                 self.visited[k] = true;
-                let new_neighbors = self.dataset.query_neighbors(k, self.eps, col_a, col_b);
+                let new_neighbors = self
+                    .dataset
+                    .lock()
+                    .unwrap()
+                    .query_neighbors(k, self.eps, self.focus.clone().into());
                 if new_neighbors.len() >= self.min_pts {
                     neighbors.extend(new_neighbors);
                 }
