@@ -11,13 +11,6 @@
 Для алгоритма Копперсмита$-$Винограда худшим случаем являются матрицы с нечётным общим размером, а лучшим - с чётным,
 из-за того что отпадает необходимость в последнем цикле.
 
-Согласно варианту, алгоритм можно оптимизировать следующим образом:
-\begin{itemize}
-    \item Предварительно получить строки столбцы соответствующих матриц;
-    \item заменить операцию x = x + k; на x += k;
-    \item заменить умножение на 2 на побитовый сдвиг;
-\end{itemize}
-
 \includeimage
 {naive_mut} % Имя файла без расширения (файл должен быть расположен в директории inc/img/)
 {f} % Обтекание (без обтекания)
@@ -95,31 +88,31 @@
 Для последующего вычисления трудоемкости введём модель вычислений:
 
 \begin{enumerate}
-    \item Операции из списка (\ref{for:opers}) имеют трудоемкость 1
+    \item Операции из списка \eqref{eq:opers} имеют трудоемкость 1.
     \begin{equation}
-        \label{for:opers}
+        \label{eq:opers}
         +, -, \%, ==, !=, <, >, <=, >=, [], ++, {-}-
     \end{equation}
-    \item Операции из списка (\ref{for:opers2}) имеют трудоемкость 2
+    \item Операции из списка \eqref{eq:opers2} имеют трудоемкость 2.
     \begin{equation}
-        \label{for:opers2}
+        \label{eq:opers2}
         *, /
     \end{equation}
-    \item Трудоемкость оператора выбора if условие then A else B рассчитывается, как (\ref{for:if})
+    \item Трудоемкость оператора выбора if условие then A else B рассчитывается, как \eqref{eq:if}.
     \begin{equation}
-        \label{for:if}
+        \label{eq:if}
         f_{if} = f_{\text{условия}} +
         \begin{cases}
             f_A, & \text{если условие выполняется,}\\
             f_B, & \text{иначе.}
         \end{cases}
     \end{equation}
-    \item Трудоемкость цикла рассчитывается, как (\ref{for:for})
+    \item Трудоемкость цикла рассчитывается, как \eqref{eq:for}.
     \begin{equation}
-        \label{for:for}
+        \label{eq:for}
         f_{for} = f_{\text{инициализации}} + f_{\text{сравнения}} + N(f_{\text{тела}} + f_{\text{инкремента}} + f_{\text{сравнения}})
     \end{equation}
-    \item Трудоемкость вызова функции равна 0
+    \item Трудоемкость вызова функции равна 0.
 \end{enumerate}
 
 \section{Трудоёмкость алгоритмов}
@@ -130,12 +123,12 @@
 \begin{itemize}
     \item Внешнего цикла по $i \in [1..A]$, трудоёмкость которого: $f = 2 + A \cdot (2 + f_{body})$;
     \item Цикла по $j \in [1..C]$, трудоёмкость которого: $f = 2 + C \cdot (2 + f_{body})$;
-    \item Скалярного умножения двух векторов - цикл по $k \in [1..B]$, трудоёмкость которого: $f = 2 + 10B$;
+    \item Скалярного умножения двух векторов - цикл по $k \in [1..B]$, трудоёмкость которого: $f = 2 + 10B$.
 \end{itemize}
 
-Трудоёмкость стандартного алгоритма равна трудоёмкости внешнего цикла, можно вычислить ее, подставив циклы тела (\ref{for:base})
+Трудоёмкость стандартного алгоритма равна трудоёмкости внешнего цикла, можно вычислить ее, подставив циклы тела \eqref{eq:base}.
 \begin{equation}
-    \label{for:base}
+    \label{eq:base}
     f_{base} = 2 + A \cdot (4 + C \cdot (4 + 10B)) = 2 + 4A + 4AC + 10ABC \approx 10ABC
 \end{equation}
 
@@ -144,33 +137,33 @@
 Трудоёмкость алгоритма Копперсмита — Винограда состоит из:
 
 \begin{enumerate}
-    \item Создания векторов rows и cols (\ref{for:init})
+    \item Создания векторов rows и cols \eqref{eq:init}.
     \begin{equation}
-        \label{for:init}
+        \label{eq:init}
         f_{create} = A + C;
     \end{equation}
 
-    \item Заполнения вектора rows (\ref{for:MH})
+    \item Заполнения вектора rows \eqref{eq:MH}.
     \begin{equation}
-        \label{for:MH}
+        \label{eq:MH}
         f_{rows} = 3 + \frac{B}{2} \cdot (5 + 12A);
     \end{equation}
 
-    \item Заполнения вектора cols (\ref{for:MV})
+    \item Заполнения вектора cols \eqref{eq:MV}.
     \begin{equation}
-        \label{for:MV}
+        \label{eq:MV}
         f_{cols} = 3 + \frac{B}{2} \cdot (5 + 12C);
     \end{equation}
 
-    \item Цикла заполнения матрицы для чётных размеров (\ref{for:cycle})
+    \item Цикла заполнения матрицы для чётных размеров \eqref{eq:cycle}.
     \begin{equation}
-        \label{for:cycle}
+        \label{eq:cycle}
         f_{cycle} = 2 + A \cdot (4 + C \cdot (11 + \frac{25}{2} \cdot B));
     \end{equation}
 
-    \item Цикла, для дополнения умножения суммой последних нечётных строки и столбца, если общий размер нечётный (\ref{for:last})
+    \item Цикла, для дополнения умножения суммой последних нечётных строки и столбца, если общий размер нечётный \eqref{eq:last}.
     \begin{equation}
-        \label{for:last}
+        \label{eq:last}
         f_{last} = \begin{cases}
                        2, & \text{чётная,}\\
                        4 + A \cdot (4 + 14C), & \text{иначе.}
@@ -180,13 +173,13 @@
 
 Итого, для худшего случая (нечётный размер матриц):
 \begin{equation}
-    \label{for:bad}
+    \label{eq:bad}
     f_{wino\_w} = A + C + 12 + 8A + 5B + 6AB + 6CB + 25AC + \frac{25}{2}ABC \approx 12.5 \cdot MNK
 \end{equation}
 
 Для лучшего случая (чётный размер матриц):
 \begin{equation}
-    \label{for:good}
+    \label{eq:good}
     f_{wino\_b} = A + C + 10 + 4A + 5B + 6AB + 6CB + 11AC + \frac{25}{2}ABC \approx 12.5 \cdot MNK
 \end{equation}
 
@@ -194,13 +187,13 @@
 
 Трудоёмкость улучшенного алгоритма Копперсмита — Винограда состоит из:
 \begin{enumerate}
-    \item Создания векторов rows и cols \eqref{for:impr_init}.
+    \item Создания векторов rows и cols \eqref{eq:impr_init}.
     \begin{equation}
-        \label{for:impr_init}
+        \label{eq:impr_init}
         f_{init} = A + C;
     \end{equation}
 
-    \item Заполнения вектора rows \eqref{for:impr_MH}.
+    \item Заполнения вектора rows \eqref{eq:impr_MH}.
     \begin{equation}
         \label{eq:impr_MH}
         f_{rows} = 2 + \frac{B}{2} \cdot (4 + 8A);
@@ -212,13 +205,13 @@
         f_{cols} = 2 + \frac{B}{2} \cdot (4 + 8A);
     \end{equation}
 
-    \item Цикла заполнения матрицы для чётных размеров \eqref{for:impr_cycle}.
+    \item Цикла заполнения матрицы для чётных размеров \eqref{eq:impr_cycle}.
     \begin{equation}
         \label{eq:impr_cycle}
         f_{cycle} = 2 + A \cdot (4 + C \cdot (8 + 9B))
     \end{equation}
 
-    \item Цикла, для дополнения умножения суммой последних нечётных строки и столбца, если общий размер нечётный \eqref{for:impr_last}.
+    \item Цикла, для дополнения умножения суммой последних нечётных строки и столбца, если общий размер нечётный \eqref{eq:impr_last}.
     \begin{equation}
         \label{eq:impr_last}
         f_{last} =
