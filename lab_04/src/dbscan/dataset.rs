@@ -19,7 +19,11 @@ impl Dataset {
         let mut dataset = Dataset::default();
         let mut reader = ReaderBuilder::new().delimiter(delimiter).from_reader(file);
 
-        println!("{}, {:?}", reader.headers().unwrap().len(), reader.headers().unwrap());
+        println!(
+            "{}, {:?}",
+            reader.headers().unwrap().len(),
+            reader.headers().unwrap()
+        );
         if *cols_to_read.iter().max().unwrap() >= reader.headers().unwrap().len() {
             panic!("Maximum index column to read is greater then number of columns");
         }
@@ -94,7 +98,7 @@ impl Dataset {
         &self,
         index: usize,
         eps: f64,
-        focus: (usize, usize)
+        focus: (usize, usize),
     ) -> Vec<usize> {
         let mut neighbors: Vec<usize> = vec![];
         let data = self.get_data();

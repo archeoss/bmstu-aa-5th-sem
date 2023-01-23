@@ -1,7 +1,12 @@
 use std::cmp::Ordering;
 use std::sync::Arc;
 
-fn merge<T: Copy, F: Fn(T, T) -> std::cmp::Ordering + Send>(x1: &[T], x2: &[T], y: &mut [T], compare_fn: &F) {
+fn merge<T: Copy, F: Fn(T, T) -> std::cmp::Ordering + Send>(
+    x1: &[T],
+    x2: &[T],
+    y: &mut [T],
+    compare_fn: &F,
+) {
     assert_eq!(x1.len() + x2.len(), y.len());
     let mut i = 0;
     let mut j = 0;
@@ -43,7 +48,11 @@ fn merge_sort<T: Copy, F: Fn(T, T) -> std::cmp::Ordering + Send>(x: &mut [T], co
     x.copy_from_slice(&y);
 }
 
-pub fn parallel_sort<T: Copy + Send, F: Copy + Fn(T, T) -> std::cmp::Ordering + Send>(data: &mut [T], compare_fn: F, threads: usize) {
+pub fn parallel_sort<T: Copy + Send, F: Copy + Fn(T, T) -> std::cmp::Ordering + Send>(
+    data: &mut [T],
+    compare_fn: F,
+    threads: usize,
+) {
     // let compare_fn = Arc::new(compare_fn);
     let chunks = std::cmp::min(data.len(), threads);
     let _ = crossbeam::scope(|scope| {
@@ -55,8 +64,13 @@ pub fn parallel_sort<T: Copy + Send, F: Copy + Fn(T, T) -> std::cmp::Ordering + 
     let n = data.len();
     let parts = n / chunks;
     for slice in (parts..n).step_by(parts) {
-        let mut y: Vec<T> = data[0..std::cmp::min(slice+parts, n)].to_vec();
-        merge(&data[0..slice], &data[slice..std::cmp::min(slice+parts, n)], &mut y[..], &compare_fn);
-        data[0..std::cmp::min(slice+parts, n)].copy_from_slice(&y);
+        let mut y: Vec<T> = data[0..std::cmp::min(slice + parts, n)].to_vec();
+        merge(
+            &data[0..slice],
+            &data[slice..std::cmp::min(slice + parts, n)],
+            &mut y[..],
+            &compare_fn,
+        );
+        data[0..std::cmp::min(slice + parts, n)].copy_from_slice(&y);
     }
 }

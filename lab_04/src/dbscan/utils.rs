@@ -5,11 +5,10 @@ use std::io::{self, BufRead};
 pub struct Focus(pub usize, pub usize);
 impl From<Focus> for (usize, usize) {
     fn from(e: Focus) -> (usize, usize) {
-        let Focus { 0: a, 1: b} = e;
+        let Focus { 0: a, 1: b } = e;
         (a, b)
     }
 }
-
 
 pub fn input_cols() -> Vec<usize> {
     println!(
@@ -67,3 +66,4 @@ pub fn pairs_compare_by_y(a: (f64, f64), b: (f64, f64)) -> std::cmp::Ordering {
         std::cmp::Ordering::Equal
     }
 }
+
