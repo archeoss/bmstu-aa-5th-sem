@@ -126,22 +126,22 @@ impl ParallelModel
         &self.cells
     }
 
+    pub fn set_eps(&mut self, eps: f64)
+    {
+        self.eps = eps;
+    }
+
+    pub fn set_min_pts(&mut self, min_pts: usize)
+    {
+        self.min_pts = min_pts;
+    }
+
     fn make_cells(&mut self)
     {
         let binding = self.dataset.lock().unwrap();
-        let max = binding.get_data()[self.focus.1]
-            .iter()
-            .max_by(|a, b| a.partial_cmp(b).unwrap())
-            .unwrap();
-        let min = binding.get_data()[self.focus.1]
-            .iter()
-            .min_by(|a, b| a.partial_cmp(b).unwrap())
-            .unwrap();
-        let disty = max - min;
 
         let vx = &binding.get_data()[self.focus.0];
         let vy = &binding.get_data()[self.focus.1];
-        // let v = vx.into_iter().zip(vy.into_iter()).collect::<Vec<(f64, f64)>>();
         self.pairs = vx
             .iter()
             .cloned()
@@ -151,8 +151,6 @@ impl ParallelModel
         parallel_sort(&mut self.pairs, &pairs_compare_by_x, self.threads_cnt);
 
         let minx = self.pairs[0].0;
-        let maxx = self.pairs[self.pairs.len() - 1].0;
-        let distx = maxx - minx;
         let mut cur_strip = 0;
         self.strips.push(Strip {
             id: 0,
@@ -305,15 +303,13 @@ impl ParallelModel
                 }
                 self.mark_core();
                 self.cluster_core();
-                // self.cluster_border();
+                self.cluster_border();
             }
         }
     }
 
-    fn mark_core(&mut self)
-    {
+    fn mark_core(&mut self) {
         let mut visited = vec![false; self.pairs.len()];
-        // let visited = Arc::new(Mutex::new(vec![false; self.pairs.len()]));
         let n = self.cells.len();
         let chunk_size = n / self.threads_cnt;
         let self_arc = Arc::new(&self);
@@ -321,9 +317,7 @@ impl ParallelModel
             let mut visited = visited.iter_mut();
             for slice in (0..n).step_by(chunk_size) {
                 let self_arc = self_arc.clone();
-                // let visited = visited.clone();
-                let mut visited2 = visited
-                    .by_ref()
+                let mut visited = visited.by_ref()
                     .take(
                         (-(self.cells[slice].point_id as i64)
                             + (self.cells[std::cmp::min(slice + chunk_size, n) - 1].point_id
@@ -334,13 +328,11 @@ impl ParallelModel
                     .collect::<Vec<_>>();
                 let k = self.cells[slice].point_id;
                 scope.spawn(move |_| {
-                    println!("{} | {}", slice, visited2.len());
                     for i in slice..std::cmp::min(slice + chunk_size, n) {
                         let cell = &self_arc.cells[i];
-                        // println!("{}", cell.amount);
                         if cell.amount >= self_arc.min_pts {
                             for i in cell.point_id..(cell.point_id + cell.amount - 1) {
-                                *visited2[i - k] = true;
+                                *visited[i - k] = true;
                             }
                         } else {
                             for i in cell.point_id..(cell.point_id + cell.amount - 1) {
@@ -348,9 +340,8 @@ impl ParallelModel
                                 for neighbor in &cell.neighbors {
                                     amount += self_arc.range_count(self_arc.pairs[i], *neighbor);
                                 }
-
                                 if amount >= self_arc.min_pts {
-                                    *visited2[i - k] = true;
+                                    *visited[i - k] = true;
                                 }
                             }
                         }
@@ -358,7 +349,6 @@ impl ParallelModel
                 });
             }
         });
-        println!("{:?}", visited);
         self.visited = visited.clone();
     }
 
@@ -379,10 +369,7 @@ impl ParallelModel
     fn cluster_core(&mut self)
     {
         let mut union_find = UnionFind::new(self.cells.len());
-        // parallel_sort(&mut self.cells, |a, b| b.neighbors.len().cmp(&a.neighbors.len()), self.threads_cnt);
         let mut clusters: Vec<i32> = vec![-1; self.pairs.len()];
-        // let mut clusters = Arc::new(Mutex::new(clusters));
-
         let n = self.cells.len();
         let chunk_size = n / self.threads_cnt;
         let self_arc = Arc::new(&self);
@@ -396,12 +383,6 @@ impl ParallelModel
                         let cell = &self_arc.cells[i];
                         if cell.amount >= self_arc.min_pts {
                             for neighbor in &cell.neighbors {
-                                // if self_arc.cells[*neighbor].amount >= cell.amount {
-                                // if cell.id < self_arc.cells[*neighbor].id && self_arc.cells[*cell].amount >= self_arc.min_pts && union_find.find(cell.id) != union_find.find(self_arc.cells[*neighbor].id) {
-                                //     union_find.union(i, *neighbor);
-                                // }
-                                // continue;
-                                // } else {
                                 let first = union_find.lock().unwrap().find(cell.id);
                                 let second = union_find
                                     .lock()
@@ -413,53 +394,50 @@ impl ParallelModel
                                 {
                                     union_find.lock().unwrap().union(i, *neighbor);
                                 }
-                                // }
                             }
                         }
                     }
                 });
             }
         });
-
-        println!("union find done");
-        println!("{:?}", union_find.lock().unwrap().array);
-        // let mut union_find = Arc::new(Mutex::new(union_find));
-        // let mut clusters = &mut clusters[..];
-        // for slice in (0..n).step_by(chunk_size) {
-        // let visited = visited.clone();
-        // let clusters = clusters.clone();
-        // for (i, slice) in clusters.chunks_mut(chunk_size).enumerate() {
-        for (i, _) in (0..n).step_by(chunk_size).enumerate() {
-            let self_arc = self_arc.clone();
-            // let union_find = union_find.clone();
-            // scope.spawn(move |_| {
-            //     for i in slice..std::cmp::min(slice+chunk_size, n) {
-
-            for j in i * chunk_size..std::cmp::min((i + 1) * chunk_size, n) {
-                let cell = &self_arc.cells[j];
-                if cell.amount >= self_arc.min_pts {
-                    for p in cell.point_id..(cell.point_id + cell.amount) {
-                        if self_arc.visited[p] {
-                            clusters[p] = union_find.lock().unwrap().find(j) as i32;
-                            // clusters[p] = union_find.find(i) as i32;
+        #[cfg(debug_assertions)]
+        {
+            println!("union find done");
+        }
+        let _ = crossbeam::scope(|scope| {
+            let mut clusters = clusters.iter_mut();
+            for (i, _) in (0..n).step_by(chunk_size).enumerate() {
+                let self_arc = self_arc.clone();
+                let union_find = union_find.clone();
+                let mut clusters = clusters
+                    .by_ref()
+                    .take(
+                        (-(self.cells[i * chunk_size].point_id as i64)
+                            + (self.cells[std::cmp::min((i + 1) * chunk_size, n) - 1].point_id
+                                as i64)
+                            + (self.cells[std::cmp::min((i + 1) * chunk_size, n) - 1].amount
+                                as i64)) as usize,
+                    )
+                    .collect::<Vec<_>>();
+                let k = self.cells[i * chunk_size].point_id;
+                scope.spawn(move |_| {
+                    for j in i * chunk_size..std::cmp::min((i + 1) * chunk_size, n) {
+                        let cell = &self_arc.cells[j];
+                        if cell.amount >= self_arc.min_pts {
+                            for p in cell.point_id..(cell.point_id + cell.amount) {
+                                if self_arc.visited[p] {
+                                    *clusters[p - k] = union_find.lock().unwrap().find(j) as i32;
+                                }
+                            }
                         }
                     }
-                }
+                });
             }
-            // let cell = &self_arc.cells[i];
-            // if cell.amount >= self_arc.min_pts {
-            //     for p in cell.point_id..(cell.point_id+cell.amount) {
-            //         println!("p: {}", p);
-            //         let d = union_find.lock().unwrap().find(i);
-            //         slice[p-chunk_size] = d as i32;
-            //     }
-            // }
-            // println!("clustered {}", i);
-            // });
+        });
+        #[cfg(debug_assertions)]
+        {
+            println!("clusters done");
         }
-        // }
-        // });
-        println!("clusters done");
         self.clusters = clusters.to_vec();
     }
 
@@ -467,37 +445,51 @@ impl ParallelModel
     {
         let n = self.cells.len();
         let chunk_size = n / self.threads_cnt;
-        // let mut clust_arc = Arc::new(Mutex::new(&self.clusters));
-        // let mut self_arc = Arc::new(&self);
-        // let _ = crossbeam::scope(|scope| {
-        for slice in (0..n).step_by(chunk_size) {
-            // let self_arc = self_arc.clone();
-            // scope.spawn(move |_| {
-            let cell = &self.cells[slice];
-            if cell.amount < self.min_pts {
-                for i in cell.point_id..(cell.point_id + cell.amount) {
-                    for neighbor in &cell.neighbors {
-                        for p in self.cells[*neighbor].point_id
-                            ..(self.cells[*neighbor].point_id + self.cells[*neighbor].amount)
-                        {
-                            if self.clusters[p] != -1
-                                && self.dst(self.pairs[i], self.pairs[p]) <= self.eps
-                            {
-                                self.clusters[i] = self.clusters[p];
-                                break;
+        let self_arc = Arc::new(&self);
+        let self_mutex = Arc::new(Mutex::new(self.clusters.clone()));
+        let _ = crossbeam::scope(|scope| {
+            for slice in (0..n).step_by(chunk_size) {
+                let self_arc = self_arc.clone();
+                let self_mutex = self_mutex.clone();
+                scope.spawn(move |_| {
+                    let cell = &self_arc.cells[slice];
+                    if cell.amount < self_arc.min_pts {
+                        for i in cell.point_id..(cell.point_id + cell.amount) {
+                            for neighbor in &cell.neighbors {
+                                for p in self_arc.cells[*neighbor].point_id
+                                    ..(self_arc.cells[*neighbor].point_id
+                                        + self_arc.cells[*neighbor].amount)
+                                {
+                                    if self_arc.clusters[p] != -1
+                                        && self_arc.dst(self_arc.pairs[i], self_arc.pairs[p])
+                                            <= self_arc.eps
+                                    {
+                                        self_mutex.lock().unwrap()[i] = self_arc.clusters[p];
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
-                }
+                });
             }
-            // });
-        }
-        // });
+        });
+        self.clusters = self_mutex.lock().unwrap().clone();
     }
 
     fn dst(&self, (x1, y1): (f64, f64), (x2, y2): (f64, f64)) -> f64
     {
         ((x1 - x2).powi(2) + (y1 - y2).powi(2)).sqrt()
+    }
+
+    pub fn reset(&mut self)
+    {
+        self.clusters = vec![];
+        self.visited = vec![false; self.visited.len()];
+        self.noises = vec![];
+        self.strips = vec![];
+        self.cells = vec![];
+        self.pairs = vec![];
     }
 }
 

@@ -1,70 +1,219 @@
 \chapter{Аналитическая часть}
 
-\section{Стандартный алгоритм}
+\section{Алгоритм DBSCAN}
+Идея, положенная в основу алгоритма, заключается в том, что внутри каждого кластера наблюдается типичная плотность точек (объектов), которая заметно выше, чем плотность снаружи кластера, а также плотность в областях с шумом ниже плотности любого из кластеров. 
 
-Пусть даны две прямоугольные матрицы
-\begin{equation}
-    A_{lm} = \begin{pmatrix}
-                 a_{11} & a_{12} & \ldots & a_{1m}\\
-                 a_{21} & a_{22} & \ldots & a_{2m}\\
-                 \vdots & \vdots & \ddots & \vdots\\
-                 a_{l1} & a_{l2} & \ldots & a_{lm}
-    \end{pmatrix},
-    \quad
-    B_{mn} = \begin{pmatrix}
-                 b_{11} & b_{12} & \ldots & b_{1n}\\
-                 b_{21} & b_{22} & \ldots & b_{2n}\\
-                 \vdots & \vdots & \ddots & \vdots\\
-                 b_{m1} & b_{m2} & \ldots & b_{mn}
-    \end{pmatrix},
-\end{equation}
+Ещё точнее, что для каждой точки кластера её соседство заданного радиуса должно содержать не менее некоторого числа точек, это число точек задаётся пороговым значением. 
+Перед изложением алгоритма дадим необходимые определения.\\
+
+\textbf{Определение 1.} Eps-соседство точки \(p\), обозначаемое как \(N_{\varepsilon}(p)\), определяется как множество документов, находящихся от точки \(p\) на расстояния не более \(\varepsilon\): 
+\(N_{\varepsilon}(p) = \{ q \in D | dist(p, q) \le \varepsilon \}\). Поиска точек, чьё \(N_{\varepsilon}(p)\) содержит хотя бы минимальное число точек (MinPt) не достаточно, так как точки бывают двух видов: 
+ядровые и граничные.\\
+\indent\textbf{Определение 2.} Точка \(p\) непосредственно плотно-достижима из точки \(q\) (при заданных \(\varepsilon\) и MinPt), если \( p \in N_{\varepsilon}(p) \) и \(|N_{\varepsilon}(p)| \ge MinPt \) (рис. \ref{img:dens}) 
+\includeimage
+{dens} % Имя файла без расширения (файл должен быть расположен в директории inc/img/)
+{f} % Обтекание (без обтекания)
+{h} % Положение рисунка (см. figure из пакета float)
+{0.75\textwidth} % Ширина рисунка
+{Пример точек, находящихся в отношении непосредственно плотной достижимости} % Подпись рисунка
+% \clearpage
+
+\textbf{Определение 3.} Точка \(p\) плотно-достижима из точки \(q\) (при заданных \(\varepsilon\) и MinPt), если существует последовательность точек \(q = p_1, p_2, ... , p_n = p: p_{i+1}\) непосредственно плотно-достижимы из \(p_i\). 
+Это отношение транзитивно, но не симметрично в общем случае, однако симметрично для двух ядровых точек.\\ 
+\clearpage
+\indent\textbf{Определение 4.} Точка \(p\) плотно-связана с точкой \(q\) (при заданных \(\varepsilon\) и MinPt), если существует точка \(o: p\, \text{и}\, q\) плотно-достижимы из \(o\) (при заданных \(\varepsilon\) и MinPt), (рис. \ref{img:dens_connect})
+\includeimage
+{dens_connect} % Имя файла без расширения (файл должен быть расположен в директории inc/img/)
+{f} % Обтекание (без обтекания)
+{h} % Положение рисунка (см. figure из пакета float)
+{0.75\textwidth} % Ширина рисунка
+{Пример точек, находящихся в отношении плотной связанности.} % Подпись рисунка
+% \clearpage
+
+Теперь мы готовы дать определения кластеру и шуму.\\ 
+\indent\textbf{Определение 5.} Кластер \(\mathcal{C}_j\) (при заданных \(\varepsilon\) и MinPt) – это не пустое подмножество документов, удовлетворяющее следующих условиям: 
+\begin{enumerate}
+    \item  \(\forall p,q: \text{если } p \in \mathcal{C}_j \,\text{и}\, q \text{ плотно-достижима из } p \text{(при заданных \(\varepsilon\) и MinPt)},\\ \text{то }q \in \mathcal{C}_j\),
+    \item  \(\forall p,q \in \mathcal{C}_j : p \,\text{плотно связана с}\, q \text{ (при заданных \(\varepsilon\) и MinPt)}\);\\
+\end{enumerate} 
+
+\indent Итак, кластер – это множество плотно-связанных точек. В каждом кластере 
+содержится хотя бы MinPt документов. \\
+\indent\textit{Шум} – это подмножество документов, которые не принадлежат ни одному 
+кластеру: \{\( p \in D |  \forall j: p \notin \mathcal{C}_j , j = \overline{ 1, |\mathcal{C}|}\)\}\\
+\indent Алгоритм DBSCAN для заданных значений параметров \(\varepsilon\) и MinPt исследует кластер следующим образом: сначала выбирает случайную точку, являющуюся ядровой, в качестве затравки, затем помещает в кластер саму затравку и все точки, плотно-достижимые из неё. 
+\clearpage
+\textbf{Алгоритм в общем виде.}
+
+\begin{table}[h!]
+        \begin{threeparttable}
+            \captionsetup{justification=raggedleft,singlelinecheck=off}
+            \begin{tabular}{l}
+                \hline
+                DBSCAN \\
+                \hline
+                Вход: множество точек документов \(\mathcal{D}\), \(\varepsilon\) и MinPt. \\
+                Выход: множество кластеров \(\mathcal{C} = \{C_j\}\).\\
+                Шаг 1. Установить всем элементам множества \(\mathcal{D}\) флаг «не посещён». \\
+                Присвоить текущему кластеру \(\mathcal{C}_j\) нулевой номер, \(j := 0\). \\
+                Множество шумовых документов Noise := \(\varnothing\).\\
+                Шаг 2. Для каждого \(d_i \in \mathcal{D}\) такого, что флаг(\(d_i\)) = «не посещён», выполнить: \\
+                Шаг 3. \tab флаг(\(d_i\)) := «посещён»; \\
+                Шаг 4. \tab \(N_i := N_{\varepsilon}(d_i) = \{q \in \mathcal{D} | dist(d_i,q) \le \varepsilon\}\) \\
+                Шаг 5. \tab Если|\(N_i\)| < MinPt, то  \\
+                \tab\tab\tab\tab Noise := Noise + \(\{d_i\}\) \\
+                \tab\tab иначе \\
+                \tab\tab\tab\tab номер следующего кластера j := j + 1;  \\
+                \tab\tab\tab\tab EXPANDCLUSTER(\(d_i, N_i, \mathcal{C}, \varepsilon, MinPt\)); \\
+                \hline
+    %            \vspace{2mm}
+            \end{tabular}
+        \end{threeparttable}
+\end{table}
+
+\begin{table}[h!]
+        \begin{threeparttable}
+            \captionsetup{justification=raggedleft,singlelinecheck=off}
+            \begin{tabular}{l}
+                \hline
+                EXPANDCLUSTER \\
+                \hline
+                Вход: текущая точка \(d_i\), его \(\varepsilon\)-соседство \(N_i\), текущий кластер \(C_j\) и \(\varepsilon\), MinPt.\\
+                Выход: кластер \(C_j\)\\
+                Шаг 1. \(C_j := C_j + \{d_i\}\); \\
+                Шаг 2. Для всех документов \(d_k \in N_i\): \\
+                Шаг 3. \tab Если флаг(\(d_k\)) = «не посещён», то \\
+                Шаг 4. \tab\tab флаг(\(d_k\)) := «посещён»; \\
+                Шаг 5. \tab\tab \(N_{ik} := N_{\varepsilon}(d_k)\); \\
+                Шаг 6. \tab\tab \(Если |N_{ik}| \ge MinPt, \text{ то } N_i := N_i + N_{ik}\); \\
+                Шаг 7. \tab Если \(\nexists p: d_k \in C_p, p = \overline{1, |\mathcal{C}|}, \text{ то } C_j := C_j = \{d_k\}\); \\
+                \hline
+            \end{tabular}
+        \end{threeparttable}
+\end{table}
+\clearpage
+\section{Параллельный алгоритм DBSCAN}
+Параллельный алгоритм DBSCAN заключается в том, что точки помещаются в непересекающиеся \(d\)-мерные клетки с длиной стороны \(\varepsilon / \sqrt{d}\) по их координатам (рис. \ref{img:cells}(b)).
+Ячейки обладают тем свойством, что все точки внутри клетки находятся на расстоянии \(\varepsilon\) друг от друга и будут принадлежать к одному и тому же кластеру.
+Затем (рис. \ref{img:cells}(c)) мы отмечаем основные точки, после чего мы генерируем кластеры для основных точек следующим образом:\\
+\indent Мы создаем граф содержащий по одной вершине на ядровую ячейку (ячейка, содержащая не менее одной ядровой точки), и соединить две вершины, если ближайшая пара ядровых точек из двух ячеек находится на расстоянии \(\varepsilon\).
+Далее будем сслыаться на него как как на клеточный граф.
+Сам этот шаг проиллюстрирован на рисунке \ref{img:cells}(d). 
+Затем находим компоненты связности графа ячеек для назначения идентификаторов кластеров точкам в ядровых ячейках и назначаем идентификаторы кластеров для граничных точек. 
+В конце возращаем список кластеров. 
 
 
-тогда матрица $C$
-\begin{equation}
-    C_{ln} = \begin{pmatrix}
-                 c_{11} & c_{12} & \ldots & c_{1n}\\
-                 c_{21} & c_{22} & \ldots & c_{2n}\\
-                 \vdots & \vdots & \ddots & \vdots\\
-                 c_{l1} & c_{l2} & \ldots & c_{ln}
-    \end{pmatrix},
-\end{equation}
+\includeimage
+{cells} % Имя файла без расширения (файл должен быть расположен в директории inc/img/)
+{f} % Обтекание (без обтекания)
+{h} % Положение рисунка (см. figure из пакета float)
+{0.75\textwidth} % Ширина рисунка
+{Параллельный алгоритм DBSCAN} % Подпись рисунка
 
-где
-\begin{equation}
-    \label{eq:M}
-    c_{ij} =
-    \sum_{r=1}^{m} a_{ir}b_{rj} \quad (i=\overline{1,l}; j=\overline{1,n})
-\end{equation}
+\clearpage
 
-будет называться произведением матриц $A$ и $B$.
-Стандартный алгоритм реализует формулу \eqref{eq:M}.
+\textbf{Алгоритм в общем виде.}
+\begin{table}[h!]
+        \begin{threeparttable}
+            \captionsetup{justification=raggedleft,singlelinecheck=off}
+            \begin{tabular}{p{16cm}}
+                \hline
+                DBSCAN \\
+                \hline
+                Вход: множество индексированных точек \(\mathcal{P}\), \(\varepsilon\) и MinPt. \\
+                Выход: множество кластеров \(\mathcal{C} = \{C_j\}\).\\
+                Шаг 1. Разбить множество \(\mathcal{P}\) точек на множество ячеек \(\mathcal{G}\)\\
+                Шаг 2. coreFlags := MarkCore(\(\mathcal{G}, \mathcal{P}, \varepsilon, MinPt\))\\
+                Шаг 3. \(\mathcal{C}\) := ClusterCore(\(\mathcal{G}, \mathcal{P}, coreFlags, \varepsilon, MinPt\))\\
+                Шаг 4. ClusterBorder(\(\mathcal{G}, \mathcal{P}, coreFlags, \mathcal{C}, \varepsilon, MinPt\))\\
+                Шаг 5. Вернуть \(\mathcal{C}\) \\
+                \hline
+    %            \vspace{2mm}
+            \end{tabular}
+        \end{threeparttable}
+\end{table}
 
-\section{Алгоритм Копперсмита -- Винограда}
+\begin{table}[h!]
+        \begin{threeparttable}
+            \captionsetup{justification=raggedleft,singlelinecheck=off}
+            \begin{tabular}{p{16cm}}
+                \hline
+                MarkCore \\
+                \hline
+                Вход: множество индексированных точек \(\mathcal{P}\), множество ячеек \(\mathcal{G}\) \(\varepsilon\) и MinPt. \\
+                Выход: список ядровых точек \(coreFlags\).\\
+                1. \(coreFlags := \{0, ..., 0\}\) \tab\tab\tab \(\backslash\backslash\) Длина равна размеру \(\mathcal{P}\) \\
+                2. Параллельно \(\forall g \in \mathcal{G}\) \\
+                3. \tab Если \(len(g) \ge minPt\)\\
+                4. \tab\tab Для \(\forall p \in g\)\\
+                5. \tab\tab\tab \(coreFlags[p] := 1\)\\
+                6. \tab\tab иначе \\
+                7. \tab\tab\tab для \(\forall p \in g\)\\
+                8. \tab\tab\tab\tab \(count:= len(g) \)\\
+                9. \tab\tab\tab\tab для \(\forall h \in g.NeighborCells(\varepsilon)\) \\
+                10. \tab\tab\tab\tab\tab \(count := count + RangeCount(p, \varepsilon, h) \)\\
+                11. \tab\tab\tab\tab Если \(count \ge minPt\)\\
+                12. \tab\tab\tab\tab\tab \(coreFlags[p] := 1\)\\
+                13. Вернуть \(coreFlags\)\\
+                \hline
+    %            \vspace{2mm}
+            \end{tabular}
+        \end{threeparttable}
+\end{table}
 
-Если посмотреть на результат умножения двух матриц, то видно, что каждый элемент в нем представляет собой скалярное произведение соответствующих строки и столбца исходных матриц.
-Можно заметить также, что такое умножение допускает предварительную обработку, позволяющую часть работы выполнить заранее.
+\begin{table}[h!]
+        \begin{threeparttable}
+            \captionsetup{justification=raggedleft,singlelinecheck=off}
+            \begin{tabular}{p{16cm}}
+                \hline
+                ClusterCore \\
+                \hline
+                Вход: множество индексированных точек \(\mathcal{P}\), множество ячеек \(\mathcal{G}\), \\
+                \tab\tab\tab\tab\tab\tab флаги ядровых ячеек \(coreFlags\), \(\varepsilon\) и MinPt. \\
+                Выход: Кластеры \(\mathcal{C}\).\\
+                1. uf := \(UnionFind()\)\tab\tab \(\backslash\backslash\)Инициализация Union-find структуры\\
+                2. Параллельно \(\forall g \in \mathcal{G}\) \\
+                3. \tab Для \(\forall h \in g.NeighborCells()\) \\
+                4. \tab\tab Если \(g > h\quad \&\&\quad uf.Find(g) \neq uf.Find(h)\) \\
+                5. \tab\tab\tab Если \(Connected(g, h)\)\\
+                6. \tab\tab\tab\tab \(uf.Link(g, h)\)\\
+                7. \tab\tab\tab для \(\forall p \in g\)\\
+                8. \(\mathcal{C} := \{-1,...,-1\}\)\tab\tab\tab Длина множества \(\mathcal{P}\) \\
+                9. Параллельно \(\forall g \in \mathcal{G}\) \\
+                10. \tab \(\forall p \in g : coreFlags[p] = 1\)\\
+                11. \tab\tab \(\mathcal{C}[p] := uf.Find(g)\)\\
+                12. Вернуть \(\mathcal{C}\)\\
+                \hline
+    %            \vspace{2mm}
+            \end{tabular}
+        \end{threeparttable}
+\end{table}
 
-Рассмотрим два вектора $V = (v_1, v_2, v_3, v_4)$ и $W = (w_1, w_2, w_3, w_4)$.
-Их скалярное произведение равно: $V \cdot W = v_1w_1 + v_2w_2 + v_3w_3 + v_4w_4$, что эквивалентно (\ref{for:new})
-\begin{equation}
-    \label{for:new}
-    V \cdot W = (v_1 + w_2)(v_2 + w_1) + (v_3 + w_4)(v_4 + w_3) - v_1v_2 - v_3v_4 - w_1w_2 - w_3w_4.
-\end{equation}
+\begin{table}[h!]
+        \begin{threeparttable}
+            \captionsetup{justification=raggedleft,singlelinecheck=off}
+            \begin{tabular}{p{16cm}}
+                \hline
+                ClusterBorder \\
+                \hline
+                Вход: множество индексированных точек \(\mathcal{P}\), множество ячеек \(\mathcal{G}\), \\
+                \tab\tab\tab кластеры \(\mathcal{C}\), флаги ядровых ячеек \(coreFlags\), \(\varepsilon\) и MinPt. \\
+                Выход: Обновленные кластеры \(\mathcal{C}\)\\ 
+                1. Параллельно \(\forall g \in \mathcal{G} : len(g) < minPt\) \\
+                2. \tab Для \(\forall p \in cell\, g : coreFlags[p] = 0\) \\
+                3. \tab\tab Для \(\forall h \in g \cup g.NeighborCells(\varepsilon)\)\\ 
+                4. \tab\tab\tab Для \(\forall q \in cell\, h : coreFlags[q] = 1\)\\
+                5. \tab\tab\tab\tab Если \(dist(p,q) \le \varepsilon\)\\
+                6. \tab\tab\tab\tab\tab \(\mathcal{C}[p] := \mathcal{C}[p] \cup \mathcal{C}[q]\)\\
+                7. Вернуть \(\mathcal{C}\)\\
+                \hline
+    %            \vspace{2mm}
+            \end{tabular}
+        \end{threeparttable}
+\end{table}
+\FloatBarrier
 
-Несмотря на то, что второе выражение требует вычисления большего количества операций, чем стандартный алгоритм: вместо четырёх умножений - шесть, а вместо трёх сложений - десять, выражение в правой части последнего равенства допускает предварительную обработку: его части можно вычислить заранее и запомнить для каждой строки первой матрицы и для каждого столбца второй, что позволит для каждого элемента выполнять лишь два умножения и пять сложений, складывая затем только лишь с 2 предварительно посчитанными суммами соседних элементов текущих строк и столбцов.
-Из-за того, что операция сложения быстрее операции умножения в ЭВМ, на практике алгоритм должен работать быстрее стандартного.
-
-\section{Оптимизированный алгоритм Копперсмита -- Винограда}
-
-Алгоритм полностью повторяет логику обычного алгоритма. Оптимизация заключается в упрощении некоторых вычислений со стороны языка программирования, такие как:
-
-\begin{itemize}
-    \item Предварительно получить строки столбцы соответствующих матриц;
-    \item заменить операцию x = x + k; на x += k;
-    \item заменить умножение на 2 на побитовый сдвиг;
-\end{itemize}
 
 \section*{Вывод}
-В данном разделе были рассмотрены алгоритмы классического умножения матриц и алгоритм Винограда, основное отличие которого от классического алгоритма — наличие предварительной обработки, а также количество операций умножения.
+В данном разделе были рассмотрены алгоритмы DBSCAN и его распараллеленного аналога.
 \clearpage

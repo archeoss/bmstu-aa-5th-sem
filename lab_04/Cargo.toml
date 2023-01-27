@@ -21,6 +21,6 @@ rfd = "0.10.0"
 crossbeam = "0.8.2"
 itertools = "0.10.5"
 
-[profile.bench.package.lab_04]
-debug = false
-opt-level = 0
+#[profile.bench.package.lab_04]
+#debug = false
+#opt-level = 0

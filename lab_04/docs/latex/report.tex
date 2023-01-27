@@ -7,13 +7,17 @@
 \usepackage[para,online,flushleft]{threeparttable}
 \usepackage{xcolor}
 \usepackage{amsmath}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}
+% \usepackage[T1]{fontenc}
 \usepackage{listings-rust}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
 \usepackage{graphicx}
 \usepackage{lstmisc}
+\usepackage{placeins}
 %\usepackage{amstex}
 %\usepackage{hyperref}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
 \lstdefinestyle{rust}{
     language=Rust,
     backgroundcolor=\color{white},
@@ -33,7 +37,9 @@
     morecomment=[l][\color{magenta}]{\#},
     columns=fullflexible
 }
-
+% \usepackage[english,russian]{babel}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
 
 \bibliography{biblio}
 
@@ -60,11 +66,11 @@
 
 
         \begin{center}
-            \Large\textbf{Отчет по лабораторной работе №2}
+            \Large\textbf{Отчет по лабораторной работе №4}
             \Large\textbf{по курсу "Анализ алгоритмов"}
         \end{center}
 
-        \noindent\textbf{Тема} $\underline{\text{~~Умножение матриц~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline\newline
+        \noindent\textbf{Тема} $\underline{\text{~~Многопоточное программирование~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline\newline
         \noindent\textbf{Студент} $\underline{\text{~~Романов С.К.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline
         \noindent\textbf{Группа} $\underline{\text{~~ИУ7-55Б~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline
         \noindent\textbf{Оценка (баллы)} $\underline{\text{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline

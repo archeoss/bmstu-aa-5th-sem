@@ -82,6 +82,16 @@ impl Model
         self.min_pts
     }
 
+    pub fn set_eps(&mut self, eps: f64)
+    {
+        self.eps = eps;
+    }
+
+    pub fn set_min_pts(&mut self, min_pts: usize)
+    {
+        self.min_pts = min_pts;
+    }
+
     pub fn run(&mut self)
     {
         let len = self.dataset.lock().unwrap().labels_amount();
@@ -147,5 +157,13 @@ impl Model
         }
 
         res
+    }
+
+    pub fn run_bench(&mut self)
+    {
+        self.run();
+        self.clusters = vec![];
+        self.visited = vec![false; self.visited.len()];
+        self.noises = vec![];
     }
 }

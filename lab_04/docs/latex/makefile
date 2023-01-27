@@ -1,9 +1,9 @@
 report:
-	pdflatex report
+	xelatex report
 	biber report
 	#bibtex report
-	pdflatex report
-	pdflatex report
+	xelatex report
+	xelatex report
 	make clean
 	mv report.pdf ../report.pdf
 

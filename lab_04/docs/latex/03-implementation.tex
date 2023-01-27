@@ -5,9 +5,9 @@
 \section{Требования к программному обеспечению}
 К программе предъявляется ряд условий:
 \begin{itemize}
-    \item[$-$] На вход подается 3 числа (A, B, C), определяющие размеры матриц, а также сами матрицы размерами AxB и BxC;
-    \item[$-$] На выход ПО должно выводить результат перемножения 2 матриц;
-    \item[$-$] ПО должно быть написано на языке Rust;
+    \item[$-$] На вход подается путь к файлу, содержащий некие двумерные данные, а также числа eps и MinPt, определяющие определяющие характеристики алгоритма;
+    \item[$-$] На выход ПО должно выводить результат алгоритма DBSCAN в графическом виде;
+    \item[$-$] ПО должно замерять время работы алгоритмов;
 \end{itemize}
 
 \section{Средства реализации}
@@ -21,116 +21,41 @@
 \section{Реализация алгоритмов}
 В следующих листингах представлены следующие алгоритмы:
 \begin{itemize}
-    \item[1.] В листинге \ref{lst:naive-mut} представлен классический алгоритм перемножения матриц
-    \item[2.] В листингах \ref{lst:winograd0} и \ref{lst:winograd1} представлены алгоритм перемножения матриц с использованием алгоритма Копперсмита$-$Винограда
-    \item[3.] В листингах \ref{lst:winograd_imp0} и \ref{lst:winograd_imp1} представлены алгоритм перемножения матриц с использованием оптимизированного алгоритма Копперсмита$-$Винограда
+    \item[1.] В листингах \ref{lst:baseSerial} и \ref{lst:expandCluster} представлен последовательный алгоритм DBSCAN.
+    \item[2.] В листингах \ref{lst:baseParallel}, \ref{lst:makeCell}, \ref{lst:markCore}, \ref{lst:clusterCore} и \ref{lst:clusterBorder} представлен параллельный алгоритм DBSCAN.
 \end{itemize}
 \newpage
 
-\subsection{Классический алгоритм перемножения матриц}
-\lstinputlisting[caption={Классический алгоритм перемножения матриц}, label={lst:naive-mut}, language=Rust, style=rust,
-firstline=73, lastline=81]{../../src/matrix/algos.rs}
-
-Замечание: здесь и далее под ключевым словом self понимается ссылка на экземпляр типа матрицы ($Vec<Vec<i32>>$).
+\subsection{Последовательный алгоритм DBSCAN}
+\lstinputlisting[caption={Последовательный алгоритм DBSCAN}, label={lst:baseSerial}, language=Rust, style=rust,
+firstline=95, lastline=122]{../../src/dbscan/model.rs}
+\newpage
+\lstinputlisting[caption={Последовательный алгоритм DBSCAN, расширение кластеров}, label={lst:expandCluster}, language=Rust, style=rust,
+firstline=124, lastline=160]{../../src/dbscan/model.rs}
 \newpage
 
-\subsection{Aлгоритм перемножения матриц Копперсмита$-$Винограда}
+\subsection{Параллельный алгоритм DBSCAN}
 
-\lstinputlisting[caption={Алгоритм перемножения матриц Копперсмита$-$Винограда}, label={lst:winograd0}, language=Rust, style=rust,
-firstline=86, lastline=116]{../../src/matrix/algos.rs}
+\lstinputlisting[caption={Параллельный алгоритм DBSCAN}, label={lst:baseParallel}, language=Rust, style=rust,
+firstline=293, lastline=309]{../../src/dbscan/para_model.rs}
 \newpage
-\lstinputlisting[caption={Алгоритм перемножения матриц Копперсмита$-$Винограда, вычисление векторов}, label={lst:winograd1}, language=Rust, style=rust,
-firstline=18, lastline=43]{../../src/matrix/algos.rs}
+\lstinputlisting[caption={Параллельный алгоритм DBSCAN, получение ячеек}, label={lst:makeCell}, language=Rust, style=rust,
+firstline=139, lastline=211]{../../src/dbscan/para_model.rs}
 \newpage
-\subsection{Оптимизированный алгоритм перемножения матриц Копперсмита$-$Винограда}
-\lstinputlisting[caption={Оптимизированный алгоритм перемножения матриц Копперсмита$-$Винограда}, label={lst:winograd_imp0}, language=Rust, style=rust,
-firstline=118, lastline=149]{../../src/matrix/algos.rs}
+\lstinputlisting[caption={Параллельный алгоритм DBSCAN, получение coreFlags}, label={lst:markCore}, language=Rust, style=rust,
+firstline=311, lastline=353]{../../src/dbscan/para_model.rs}
 \newpage
-\lstinputlisting[caption={Оптимизированный алгоритм перемножения матриц Копперсмита$-$Винограда, вычисление векторов}, label={lst:winograd_imp1}, language=Rust, style=rust,
-firstline=45, lastline=69]{../../src/matrix/algos.rs}
+\lstinputlisting[caption={Параллельный алгоритм DBSCAN, получение кластеров}, label={lst:clusterCore}, language=Rust, style=rust,
+firstline=369, lastline=442]{../../src/dbscan/para_model.rs}
+\newpage
+\lstinputlisting[caption={Параллельный алгоритм DBSCAN, расширение кластеров}, label={lst:clusterBorder}, language=Rust, style=rust,
+firstline=446, lastline=480]{../../src/dbscan/para_model.rs}
 \newpage
 \section{Тестовые данные}
 
-В таблице~\ref{tabular:test_rec} приведены тесты для функций, реализующих стандартный алгоритм умножения матриц, алгоритм Винограда и оптимизированный алгоритм Винограда. Все тесты пройдены успешно.
-
-\begin{table}[h!]
-    \begin{center}
-        \begin{threeparttable}
-            \captionsetup{justification=raggedright,singlelinecheck=off}
-            \caption{\label{tabular:test_rec} Тестирование функций}
-            \begin{tabular}{|c|c|c|c|c|c|}
-                \hline
-                Первая матрица & Вторая матрица & Ожидаемый результат \\ \hline
-    %            \vspace{4mm}
-                $\begin{pmatrix}
-                     1 & 2 & 3\\
-                     1 & 2 & 3\\
-                     1 & 2 & 3
-                \end{pmatrix}$ &
-                $\begin{pmatrix}
-                     1 & 2 & 3\\
-                     1 & 2 & 3\\
-                     1 & 2 & 3
-                \end{pmatrix}$ &
-                $\begin{pmatrix}
-                     6 & 12 & 18\\
-                     6 & 12 & 18\\
-                     6 & 12 & 18
-                \end{pmatrix}$ \\
-    %            \vspace{2mm}
-                \hline
-    %            \vspace{2mm}
-                $\begin{pmatrix}
-                     1 & 2 & 2\\
-                     1 & 2 & 2
-                \end{pmatrix}$ &
-                $\begin{pmatrix}
-                     1 & 2\\
-                     1 & 2\\
-                     1 & 2
-                \end{pmatrix}$ &
-                $\begin{pmatrix}
-                     5 & 10\\
-                     5 & 10
-                \end{pmatrix}$ \\
-    %            \vspace{2mm}
-                \hline
-    %            \vspace{2mm}
-                $\begin{pmatrix}
-                     2
-                \end{pmatrix}$ &
-                $\begin{pmatrix}
-                     2
-                \end{pmatrix}$ &
-                $\begin{pmatrix}
-                     4
-                \end{pmatrix}$ \\
-    %            \vspace{2mm}
-                \hline
-    %            \vspace{2mm}
-                $\begin{pmatrix}
-                     1 & -2 & 3\\
-                     1 & 2 & 3\\
-                     1 & 2 & 3
-                \end{pmatrix}$ &
-                $\begin{pmatrix}
-                     -1 & 2 & 3\\
-                     1 & 2 & 3\\
-                     1 & 2 & 3
-                \end{pmatrix}$ &
-                $\begin{pmatrix}
-                     0 & 4 & 6\\
-                     4 & 12 & 18\\
-                     4 & 12 & 18
-                \end{pmatrix}$\\
-    %            \vspace{2mm}
-                \hline
-    %            \vspace{2mm}
-            \end{tabular}
-        \end{threeparttable}
-    \end{center}
-\end{table}
+Одним из недостатков алгоритма DBSCAN является его неодназначность, т.е. нет гарантии в однозначности результата. В связи с этим провести сравнение с неким эталонным результатом не представляется возможным
 
 \section*{Вывод}
 
-В данном разделе были разработаны исходные коды четырёх алгоритмов перемножения матриц: обычный алгоритм, алгоритм с транспонированием, алгоритм Копперсмита — Винограда, оптимизированный алгоритм Копперсмита — Винограда.
+В данном разделе был продемонстрирован исходный код алгоритма DBSACN, последовательного и параллельного.
+

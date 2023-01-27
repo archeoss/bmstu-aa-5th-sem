@@ -2,13 +2,16 @@ use csv::ReaderBuilder;
 use std::fs::File;
 
 #[derive(Default, Debug, Clone)]
-pub struct Dataset {
+pub struct Dataset
+{
     data: Vec<Vec<f64>>,
     labels: Vec<String>,
 }
 
-impl Dataset {
-    pub fn input_dataset(filename: String, mut cols_to_read: Vec<usize>, delimiter: u8) -> Dataset {
+impl Dataset
+{
+    pub fn input_dataset(filename: String, mut cols_to_read: Vec<usize>, delimiter: u8) -> Dataset
+    {
         let file = match File::open(filename) {
             Ok(f) => f,
             Err(e) => {
@@ -18,12 +21,14 @@ impl Dataset {
 
         let mut dataset = Dataset::default();
         let mut reader = ReaderBuilder::new().delimiter(delimiter).from_reader(file);
-
-        println!(
-            "{}, {:?}",
-            reader.headers().unwrap().len(),
-            reader.headers().unwrap()
-        );
+        #[cfg(debug_assertions)]
+        {
+            println!(
+                "{}, {:?}",
+                reader.headers().unwrap().len(),
+                reader.headers().unwrap()
+            );
+        }
         if *cols_to_read.iter().max().unwrap() >= reader.headers().unwrap().len() {
             panic!("Maximum index column to read is greater then number of columns");
         }
@@ -70,23 +75,28 @@ impl Dataset {
         dataset
     }
 
-    pub fn get_data(&self) -> &Vec<Vec<f64>> {
+    pub fn get_data(&self) -> &Vec<Vec<f64>>
+    {
         &self.data
     }
 
-    pub fn get_data_mut(&mut self) -> &mut Vec<Vec<f64>> {
+    pub fn get_data_mut(&mut self) -> &mut Vec<Vec<f64>>
+    {
         &mut self.data
     }
 
-    pub fn get_labels(&self) -> &Vec<String> {
+    pub fn get_labels(&self) -> &Vec<String>
+    {
         &self.labels
     }
 
-    pub fn labels_amount(&self) -> usize {
+    pub fn labels_amount(&self) -> usize
+    {
         self.labels.len()
     }
 
-    pub fn records_amount(&self) -> usize {
+    pub fn records_amount(&self) -> usize
+    {
         if self.data.is_empty() {
             0
         } else {
@@ -99,7 +109,8 @@ impl Dataset {
         index: usize,
         eps: f64,
         focus: (usize, usize),
-    ) -> Vec<usize> {
+    ) -> Vec<usize>
+    {
         let mut neighbors: Vec<usize> = vec![];
         let data = self.get_data();
         for i in 0..self.records_amount() {

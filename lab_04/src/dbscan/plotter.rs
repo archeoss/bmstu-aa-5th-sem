@@ -2,6 +2,7 @@ use crate::dbscan::model::Model;
 use crate::dbscan::para_model::{Cell, ParallelModel};
 use plotters::prelude::*;
 use rand::Rng;
+const RESOLUTION_SCALE: f64 = 3.0;
 
 pub fn plot_model_2d(model: Model)
 {
@@ -11,10 +12,16 @@ pub fn plot_model_2d(model: Model)
     let data = dataset.get_data();
     let mut rng = rand::thread_rng();
     for (j, cluster) in model.get_clusters().iter().enumerate() {
-        println!("{:?}", cluster);
         let (cluster, col_a, col_b) = cluster;
-        let s = &format!("./plots/{}.png", j)[..];
-        let root = BitMapBackend::new(s, (1290, 960)).into_drawing_area();
+        let s = &format!("./plots/serial{}.png", j)[..];
+        let root = BitMapBackend::new(
+            s,
+            (
+                (1290.0 * RESOLUTION_SCALE) as u32,
+                (960.0 * RESOLUTION_SCALE) as u32,
+            ),
+        )
+        .into_drawing_area();
         root.fill(&WHITE).unwrap();
         let root = root.margin(10, 10, 10, 10);
         // After this point, we should be able to draw construct a chart context
@@ -66,7 +73,6 @@ pub fn plot_model_2d(model: Model)
                 ))
                 .unwrap();
         }
-        println!("pp");
         root.present().unwrap();
     }
 }
@@ -94,10 +100,16 @@ pub fn plot_parallel_model_2d(model: ParallelModel)
     let focus = model.get_focus();
     let mut rng = rand::thread_rng();
     let clusters = model.get_clusters();
-    // println!("{:?}", cluster);
     let (col_a, col_b) = (focus.0, focus.1);
-    let s = &format!("./plots/{}.png", 0)[..];
-    let root = BitMapBackend::new(s, (1290, 960)).into_drawing_area();
+    let s = &format!("./plots/parallel{}.png", 0)[..];
+    let root = BitMapBackend::new(
+        s,
+        (
+            (1290.0 * RESOLUTION_SCALE) as u32,
+            (960.0 * RESOLUTION_SCALE) as u32,
+        ),
+    )
+    .into_drawing_area();
     root.fill(&WHITE).unwrap();
     let root = root.margin(10, 10, 10, 10);
     // After this point, we should be able to draw construct a chart context
@@ -131,20 +143,16 @@ pub fn plot_parallel_model_2d(model: ParallelModel)
         .draw()
         .unwrap();
 
-    // println!("{:?}", clusters);
-
     let mut to_draw: Vec<Vec<(f64, f64)>> =
         vec![vec![]; *clusters.iter().max().unwrap() as usize + 1];
     // let mut to_draw: Vec<Vec<(f64, f64)>> = vec![vec![]; pairs.len()];
 
     for i in 0..pairs.len() {
-        // println!("{}, {}",clusters[i],clusters.iter().max().unwrap());
         if clusters[i] != -1 {
             to_draw[clusters[i] as usize].push((pairs[i].0 as f64, pairs[i].1 as f64))
             // to_draw[i].push((pairs[i].0 as f64, pairs[i].1 as f64));
         }
     }
-    println!("pppp");
     for to_draw in to_draw {
         if to_draw.len() > model.get_min_pts() {
             chart
@@ -160,26 +168,6 @@ pub fn plot_parallel_model_2d(model: ParallelModel)
                 .unwrap();
         }
     }
-    // for cluster in 0..*clusters.iter().max().unwrap()+1 {
-    //     // println!("cluster: {}", cluster);
-    //     let mut to_draw: Vec<(f64, f64)> = vec![];
-    //     for i in 0..pairs.len() {
-    //         if clusters[i] == cluster {
-    //             to_draw.push((pairs[i].0 as f64, pairs[i].1 as f64));
-    //         }
-    //     }
-    //     chart
-    //         .draw_series(PointSeries::of_element(
-    //             to_draw,
-    //             5,
-    //             RGBColor(rng.gen::<u8>(), rng.gen::<u8>(), rng.gen::<u8>()).filled(),
-    //             &|c, s, st| {
-    //                 EmptyElement::at(c)    // We want to construct a composed element on-the-fly
-    //                     + Circle::new((0, 0), s, st.filled()) // At this point, the new pixel coordinate is established;
-    //             },
-    //         ))
-    //         .unwrap();
-    // }
     root.present().unwrap();
 }
 
@@ -208,7 +196,14 @@ pub fn draw_cells(model: &ParallelModel)
     let mut rng = rand::thread_rng();
     let (col_a, col_b) = (focus.0, focus.1);
     let s = &format!("./plots/cells{}.png", 0)[..];
-    let root = BitMapBackend::new(s, (1290 * 5, 960 * 5)).into_drawing_area();
+    let root = BitMapBackend::new(
+        s,
+        (
+            (1290.0 * RESOLUTION_SCALE) as u32,
+            (960.0 * RESOLUTION_SCALE) as u32,
+        ),
+    )
+    .into_drawing_area();
     root.fill(&WHITE).unwrap();
     let root = root.margin(10, 10, 10, 10);
     // After this point, we should be able to draw construct a chart context
@@ -242,14 +237,11 @@ pub fn draw_cells(model: &ParallelModel)
         .draw()
         .unwrap();
 
-    // println!("{:?}", clusters);
-
     let mut to_draw: Vec<Vec<(f64, f64)>> = vec![vec![]; cells.len() as usize];
     // let mut to_draw: Vec<Vec<(f64, f64)>> = vec![vec![]; pairs.len()];
     let mut frames_to_draw: Vec<Vec<(f64, f64)>> = vec![vec![]; cells.len() as usize];
     for (n, cell) in cells.iter().enumerate() {
         let (mut min_x, mut max_x, mut min_y, mut max_y) = (f64::MAX, f64::MIN, f64::MAX, f64::MIN);
-        // println!("{}, {}",clusters[i],clusters.iter().max().unwrap());
         for i in cell.get_point_id()..cell.get_point_id() + cell.get_amount() {
             to_draw[n].push((pairs[i].0 as f64, pairs[i].1 as f64));
             min_x = min_x.min(pairs[i].0);
@@ -264,7 +256,6 @@ pub fn draw_cells(model: &ParallelModel)
         frames_to_draw[n].push((min_x, max_y));
         frames_to_draw[n].push((min_x, min_y));
     }
-    println!("pppp");
     for (i, frame) in frames_to_draw.into_iter().enumerate() {
         if to_draw[i].len() < model.get_min_pts() {
             continue;
@@ -288,25 +279,5 @@ pub fn draw_cells(model: &ParallelModel)
                 .unwrap();
         }
     }
-    // for cluster in 0..*clusters.iter().max().unwrap()+1 {
-    //     // println!("cluster: {}", cluster);
-    //     let mut to_draw: Vec<(f64, f64)> = vec![];
-    //     for i in 0..pairs.len() {
-    //         if clusters[i] == cluster {
-    //             to_draw.push((pairs[i].0 as f64, pairs[i].1 as f64));
-    //         }
-    //     }
-    //     chart
-    //         .draw_series(PointSeries::of_element(
-    //             to_draw,
-    //             5,
-    //             RGBColor(rng.gen::<u8>(), rng.gen::<u8>(), rng.gen::<u8>()).filled(),
-    //             &|c, s, st| {
-    //                 EmptyElement::at(c)    // We want to construct a composed element on-the-fly
-    //                     + Circle::new((0, 0), s, st.filled()) // At this point, the new pixel coordinate is established;
-    //             },
-    //         ))
-    //         .unwrap();
-    // }
     root.present().unwrap();
 }
