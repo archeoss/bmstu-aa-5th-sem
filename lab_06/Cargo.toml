@@ -1,0 +1,29 @@
+[package]
+authors = [ "Simeon Romanov <archeosAnacritis@gmail.com>" ]
+name = "lab_06"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0"
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "bench"
+harness = false
+
+[dependencies]
+colored = "2.0.0"
+rand = "0.8.4"
+csv = "1.1.6"
+plotters = "0.3.4"
+rfd = "0.10.0"
+crossbeam = "0.8.2"
+itertools = "0.10.5"
+serde = "1.0"
+serde_derive = "1.0"
+serde_json = "1.0"
+
+[profile.bench.package.lab_06]
+debug = false
+opt-level = 0

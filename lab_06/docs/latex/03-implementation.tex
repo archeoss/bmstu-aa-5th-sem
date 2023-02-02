@@ -1,0 +1,81 @@
+\chapter{Технологическая часть}
+
+В данном разделе приведены требования к программному обеспечению, средства реализации и сами реализации алгоритмов.
+
+\section{Требования к программному обеспечению}
+К программе предъявляется ряд условий:
+\begin{itemize}
+    \item[$-$] на вход подаётся матрица смежности графа;
+    \item[$-$] на выходе программа выдаёт минимальную длину и путь, на котором данная длина достигнута;
+    \item[$-$] ПО должно замерять время работы алгоритмов.
+\end{itemize}
+
+\section{Средства реализации}
+Для реализации данной лабораторной работы необходимо установить следующее программное обеспечение:
+\begin{itemize}
+    \item \href{https://www.rust-lang.org/}{Rust Programming Language v1.64.0} - язык программирования
+    \item \href{https://github.com/bheisler/criterion.rs}{Criterion.rs v0.4.0} - Средство визуализации данных
+    \item \href{https://www.latex-project.org/}{LaTeX} - система документооборота
+\end{itemize}
+
+\section{Реализация алгоритмов}
+В следующих листингах представлены следующие алгоритмы:
+В листинге \ref{lst:brute} представлена реализация алгоритма полного перебора, в листинге \ref{lst:antsolver} представлена реализация муравьиного алгоритма. В листингах \ref{lst:config} и \ref{lst:ant} представлены конфигурационная структура и структура муравья с методами соотвественно.
+\lstinputlisting[
+        caption={Реализация полного перебора.},
+        label={lst:brute},
+        style={rust}
+    ]{../../src/ants/brute_solver.rs}
+
+\lstinputlisting[caption={Реализация муравьиного алгоритма.},
+        label={lst:antsolver},
+        style={rust}
+    ]{../../src/ants/ant_solver.rs}
+\lstinputlisting[
+        caption={Конфигурационная структура.},
+        label={lst:config},
+        style={rust}
+    ]{../../src/ants/ant_solver/config.rs}
+\lstinputlisting[
+        caption={Структура муравья и её методы.},
+        label={lst:ant},
+        style={rust}
+    ]{../../src/ants/ant_solver/ant.rs}
+
+\section{Тестирование функций.}
+
+В таблице~\ref{tab:tests} приведены тесты для функции, реализующей алгоритм для решения задачи коммивояжера. Тесты пройдены успешно.
+
+\begin{table}[h!]
+    \begin{center}
+        \caption{\label{tab:tests} Тестирование функций}
+        \begin{tabular}{|c@{\hspace{7mm}}|c@{\hspace{7mm}}|c@{\hspace{7mm}}|c@{\hspace{7mm}}|}
+            \hline
+            Матрица смежности & Ожидаемый наименьший путь \\ \hline
+            $\begin{pmatrix}
+                0 &  9 &  12 &  45\\
+                13 &  0 &  2 &  27\\
+                13 &  8 &  0 &  21\\
+                27 &  26 &  25 &  0
+            \end{pmatrix}$ &
+            32, [0, 1, 2, 3]\TBstrut \\ \hline
+            $\begin{pmatrix}
+                0 &  21 &  -1 &  9\\
+                22 &  0 &  12 &  15\\
+                -1 &  17 &  0 &  -1\\
+                13 &  20 &  -1 &  0
+            \end{pmatrix}$ &
+            9, [0, 3]\TBstrut \\ \hline
+            $\begin{pmatrix}
+                0 &  24 &  8 &  28\\
+                24 &  0 &  4 &  12\\
+                14 &  6 &  0 &  26\\
+                21 &  12 &  17 &  0
+            \end{pmatrix}$ &
+            26, [0, 2, 1, 3]\TBstrut \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\section*{Вывод}
+Спроектированные алгоритмы были реализованы и протестированы.

@@ -1,0 +1,12 @@
+{
+    "alpha": 0.7,
+    "beta": 0.3,
+    "e": 0,
+    "p": 0.4,
+    "m": 8,
+    "tmax": 50,
+    "pheromon_start": 1.0,
+    "pheromon_min": 0.1,
+    "start": 0,
+    "end":7
+}

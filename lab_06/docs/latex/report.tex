@@ -1,0 +1,102 @@
+\documentclass[a4paper,14pt]{extreport}
+
+\include{preamble.inc}
+% \usepackage{algorithm}
+% \usepackage{textcomp}
+% \usepackage{algpseudocode}
+% \usepackage{svg}
+% \svgpath{{./inc/img/}}
+% \usepackage[para,online,flushleft]{threeparttable}
+% \usepackage{xcolor}
+% \usepackage{amsmath}
+% % \usepackage[utf8]{inputenc}
+% % \usepackage[T1]{fontenc}
+% \usepackage{listings-rust}
+% \usepackage{fontspec}
+% \setmainfont{Times New Roman}
+% \usepackage{graphicx}
+% \usepackage{lstmisc}
+% \usepackage{placeins}
+% %\usepackage{amstex}
+% %\usepackage{hyperref}
+% \newcommand\tab[1][1cm]{\hspace*{#1}}
+% \lstdefinestyle{rust}{
+%     language=Rust,
+%     backgroundcolor=\color{white},
+%     basicstyle=\footnotesize\ttfamily,
+%     keywordstyle=\color{purple},
+%     stringstyle=\color{green},
+%     commentstyle=\color{gray},
+%     numbers=left,
+%     stepnumber=1,
+%     numbersep=5pt,
+%     frame=single,
+%     tabsize=4,
+%     captionpos=t,
+%     breaklines=true,
+%     breakatwhitespace=true,
+%     escapeinside={\#*}{*)},
+%     morecomment=[l][\color{magenta}]{\#},
+%     columns=fullflexible
+% }
+% % \usepackage[english,russian]{babel}
+% \usepackage{fontspec}
+% \setmainfont{Times New Roman}
+%
+\begin{document}
+
+    \begin{titlepage}
+        \newgeometry{pdftex, left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+        \fontsize{12pt}{12pt}\selectfont
+        \noindent \begin{minipage}{0.15\textwidth}
+                      \includegraphics[width=\linewidth]{inc/img/b_logo.jpg}
+        \end{minipage}
+        \noindent\begin{minipage}{0.9\textwidth}\centering
+        \textbf{Министерство науки и высшего образования Российской Федерации}\\
+        \textbf{Федеральное государственное бюджетное образовательное учреждение высшего образования}\\
+        \textbf{«Московский государственный технический университет имени Н.Э.~Баумана}\\
+        \textbf{(национальный исследовательский университет)»}\\
+        \textbf{(МГТУ им. Н.Э.~Баумана)}
+        \end{minipage}
+
+        \noindent\rule{18cm}{3pt}
+        \newline\newline
+        \noindent ФАКУЛЬТЕТ $\underline{\text{«Информатика и системы управления»~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$ \newline\newline
+        \noindent КАФЕДРА $\underline{\text{«Программное обеспечение ЭВМ и информационные технологии»~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline\newline\newline\newline\newline\newline
+
+
+        \begin{center}
+            \Large\textbf{Отчет по лабораторной работе №6}
+            \Large\textbf{по курсу "Анализ алгоритмов"}
+        \end{center}
+
+        \noindent\textbf{Тема} $\underline{\text{~~Муравьиный алгоритм~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline\newline
+        \noindent\textbf{Студент} $\underline{\text{~~Романов С.К.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline
+        \noindent\textbf{Группа} $\underline{\text{~~ИУ7-55Б~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline
+        \noindent\textbf{Оценка (баллы)} $\underline{\text{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline
+        \noindent\textbf{Преподаватели} $\underline{\text{~~Волкова Л.Л., Строганов Ю.В.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$\newline
+
+        \begin{center}
+            \vfill
+            Москва~---~\the\year
+            ~г.
+        \end{center}
+        \restoregeometry
+    \end{titlepage}
+
+\tableofcontents
+
+\include{00-intro}
+
+\include{01-theoretical}
+\include{02-practical}
+\include{03-implementation}
+\include{04-research}
+
+\include{05-conclusion}
+%\include{03-appendix}
+
+% \makebibliography
+\bibliographystyle{utf8gost705u}  % стилевой файл для оформления по ГОСТу
+\bibliography{51-biblio}  
+\end{document}
