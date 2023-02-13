@@ -33,8 +33,8 @@ fn dbscan_bench(c: &mut Criterion)
             b.iter(|| {
                 parallel_model.run();
                 parallel_model.reset();
-                black_box(())
-            })
+                black_box(());
+            });
         });
     }
 

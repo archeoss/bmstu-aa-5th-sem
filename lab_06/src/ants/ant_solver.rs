@@ -6,7 +6,6 @@ pub use config::Config;
 
 mod ant;
 use ant::Ant;
-
 pub struct AntSolver<'a>
 {
     data: &'a [Vec<Cost>],
@@ -35,9 +34,11 @@ impl<'a> AntSolver<'a>
     fn compute_q(data: &[Vec<Cost>]) -> f64
     {
         // sum of all
-        let q = data
-            .iter()
-            .fold(0 as Cost, |acc, row| acc + row.iter().sum::<Cost>()) as f64;
+        let q = data.iter().fold(0 as Cost, |acc, row| {
+            acc.saturating_add(
+                usize::try_from(row.iter().map(|x| *x as u128).sum::<u128>()).unwrap_or(usize::MAX),
+            )
+        }) as f64;
         q / data.len() as f64
     }
 
@@ -139,8 +140,10 @@ impl<'a> AntSolver<'a>
             pdata[win[0]][win[1]] += val;
             pdata[win[1]][win[0]] += val;
         });
-        let (first, last) = (best_t[0], best_t[best_t.len() - 1]);
-        pdata[first][last] += val;
-        pdata[last][first] += val;
+        if best_t.len() > 0 {
+            let (first, last) = (best_t[0], best_t[best_t.len() - 1]);
+            pdata[first][last] += val;
+            pdata[last][first] += val;
+        }
     }
 }

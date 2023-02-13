@@ -1,0 +1,96 @@
+\chapter{Технологическая часть}
+
+В данном разделе приведены требования к программному обеспечению, средства реализации и сами реализации алгоритмов.
+
+\section{Требования к программному обеспечению}
+К программе предъявляется ряд условий:
+\begin{itemize}
+    \item[$-$] на вход ковейера подаётся массив задач, которые на нём нужно обработать;
+	\item[$-$] на выходе - лог-запись, в которой записаны в упорядоченном по времени порядке события начала и конца обработки определённого задания на ленте.
+    \item[$-$] ПО должно замерять время работы алгоритмов.
+\end{itemize}
+
+\section{Средства реализации}
+Для реализации данной лабораторной работы необходимо установить следующее программное обеспечение:
+\begin{itemize}
+    \item[$-$] \href{https://www.rust-lang.org/}{Rust Programming Language v1.64.0} - язык программирования\cite{Rust}
+    \item[$-$] \href{https://github.com/bheisler/criterion.rs}{Criterion.rs v0.4.0} - Средство визуализации данных
+    \item[$-$] \href{https://www.latex-project.org/}{LaTeX} - система верстки документов
+\end{itemize}
+
+\section{Листинг кода}
+
+В листингах \ref{lst:conveyor1} и \ref{lst:conveyor2} приведена реализация конвейера. В листингах \ref{lst:task1}, \ref{lst:task2}, \ref{lst:task3} и \ref{lst:task4} приведена реализация задачи.
+
+\begin{lstinputlisting}[
+	caption={Реализация конвейера, часть 1},
+	label={lst:conveyor1},
+	style={rust},
+	linerange={1-39}
+]{../src/dbscan/conveyor.rs}
+\end{lstinputlisting}
+\clearpage
+\begin{lstinputlisting}[
+	caption={Реализация конвейера, часть 2},
+	label={lst:conveyor2},
+	style={rust},
+	linerange={41-55}
+]{../src/dbscan/conveyor.rs}
+\end{lstinputlisting}
+
+\begin{lstinputlisting}[
+	caption={Структура задачи, часть 1},
+	label={lst:task1},
+	style={rust},
+    linerange={16-40}
+]{../src/dbscan/task.rs}
+\end{lstinputlisting}
+\clearpage
+\begin{lstinputlisting}[
+	caption={Структура задачи, часть 2},
+	label={lst:task2},
+	style={rust},
+    linerange={42-75}
+]{../src/dbscan/task.rs}
+\end{lstinputlisting}
+\clearpage
+\begin{lstinputlisting}[
+	caption={Структура задачи, часть 3},
+	label={lst:task3},
+	style={rust},
+    linerange={77-108}
+]{../src/dbscan/task.rs}
+\end{lstinputlisting}
+\clearpage
+\begin{lstinputlisting}[
+	caption={Структура задачи, часть 4},
+	label={lst:task4},
+	style={rust},
+    linerange={110-155}
+]{../src/dbscan/task.rs}
+\end{lstinputlisting}
+% \begin{lstinputlisting}[
+% 	caption={Структура задачи, часть 1},
+% 	label={lst:task},
+% 	style={rust},
+%     linerange={77-96}
+% ]{../src/dbscan/task.rs}
+% \end{lstinputlisting}
+
+% \begin{lstinputlisting}[
+% 	caption={Дополнительные структуры},
+% 	label={lst:add},
+% 	style={rust}
+% ]{../src/dbscan/additional_structs.rs}
+% \end{lstinputlisting}
+
+\section{Тестирование функций.}
+
+Одним из способов протестировать работу DBSCAN является графическое отображение полученных кластеров. 
+
+\img{100mm}{parallel0.png}{Тестирование работы DBSCAN}
+Алгоритм успешно кластеризует данные.
+
+\section*{Вывод}
+
+Была разработана реализация конвейерных вычислений.

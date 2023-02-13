@@ -13,9 +13,9 @@
 \section{Средства реализации}
 Для реализации данной лабораторной работы необходимо установить следующее программное обеспечение:
 \begin{itemize}
-    \item \href{https://www.rust-lang.org/}{Rust Programming Language v1.64.0} - язык программирования
-    \item \href{https://github.com/bheisler/criterion.rs}{Criterion.rs v0.4.0} - Средство визуализации данных
-    \item \href{https://www.latex-project.org/}{LaTeX} - система документооборота
+    \item[$-$] \href{https://www.rust-lang.org/}{Rust Programming Language v1.64.0} - язык программирования\cite{Rust}
+    \item[$-$] \href{https://github.com/bheisler/criterion.rs}{Criterion.rs v0.4.0} - Средство визуализации данных
+    \item[$-$] \href{https://www.latex-project.org/}{LaTeX} - система верстки документов
 \end{itemize}
 
 \section{Реализация алгоритмов}
@@ -24,27 +24,74 @@
 \lstinputlisting[
         caption={Реализация полного перебора.},
         label={lst:brute},
-        style={rust}
+        style={rust},
+        firstline=4,
+        lastline=44
+    ]{../../src/ants/brute_solver.rs}
+    \clearpage
+\lstinputlisting[
+        caption={Реализация полного перебора, часть 2.},
+        label={lst:brute},
+        style={rust},
+        firstline=46,
+        lastline=56
     ]{../../src/ants/brute_solver.rs}
 
-\lstinputlisting[caption={Реализация муравьиного алгоритма.},
-        label={lst:antsolver},
-        style={rust}
-    ]{../../src/ants/ant_solver.rs}
 \lstinputlisting[
         caption={Конфигурационная структура.},
         label={lst:config},
         style={rust}
     ]{../../src/ants/ant_solver/config.rs}
+\clearpage
+\lstinputlisting[caption={Реализация муравьиного алгоритма, часть 1.},
+        label={lst:antsolver},
+        style={rust},
+        firstline=9,
+        lastline=42
+    ]{../../src/ants/ant_solver.rs}
+\clearpage
+\lstinputlisting[caption={Реализация муравьиного алгоритма, часть 2.},
+        label={lst:antsolver},
+        style={rust},
+        firstline=43,
+        lastline=81
+    ]{../../src/ants/ant_solver.rs}
+\clearpage
+\lstinputlisting[caption={Реализация муравьиного алгоритма, часть 3.},
+        label={lst:antsolver},
+        style={rust},
+        firstline=82,
+        lastline=113
+    ]{../../src/ants/ant_solver.rs}
+\clearpage
+\lstinputlisting[caption={Реализация муравьиного алгоритма, часть 4.},
+        label={lst:antsolver},
+        style={rust},
+        firstline=114,
+        lastline=146
+    ]{../../src/ants/ant_solver.rs}
+\clearpage
+
 \lstinputlisting[
-        caption={Структура муравья и её методы.},
+        caption={Структура муравья и её методы, часть 1.},
         label={lst:ant},
-        style={rust}
+        style={rust},
+        firstline=4,
+        lastline=47
     ]{../../src/ants/ant_solver/ant.rs}
+\clearpage
+\lstinputlisting[
+        caption={Структура муравья и её методы, часть 2.},
+        label={lst:ant},
+        style={rust},
+        firstline=49,
+        lastline=81
+    ]{../../src/ants/ant_solver/ant.rs}
+\clearpage
 
 \section{Тестирование функций.}
 
-В таблице~\ref{tab:tests} приведены тесты для функции, реализующей алгоритм для решения задачи коммивояжера. Тесты пройдены успешно.
+В таблице~\ref{tab:tests} приведены тесты для функции, реализующей алгоритм для решения задачи поиска минимального пути. Тесты пройдены успешно.
 
 \begin{table}[h!]
     \begin{center}
