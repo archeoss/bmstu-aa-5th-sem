@@ -1,0 +1,169 @@
+\chapter{Исследовательская часть}
+
+Ниже приведены технические характеристики устройства, на котором было проведено тестирование ПО.
+
+\begin{itemize}
+    \item[$-$] Операционная система: Arch Linux~\cite{arch} 64-bit.
+    \item[$-$] Оперативная память: 16 Гбайт, DDR4.
+    \item[$-$] Процессор: 11th Gen Intel\textsuperscript{\tiny\textregistered} Core\textsuperscript{\tiny\texttrademark} i5-11320H @ 3.20 ГГц~\cite{i5}. 
+\end{itemize}
+
+\section{Формализация объекта и его признака}\label{formal}
+
+Согласно согласованному варианту, формализуем объект <<Стрелок>> следующим образом: 
+определим набор данных и признак объекта, на основании которого составим набор терм.
+
+Набор данных для объекта:
+\begin{itemize}
+	\item[$-$] Имя стрелка --- строка;
+	\item[$-$] Меткость в MOA --- число с плавающей точкой;
+\end{itemize}
+
+Согласно варианту, числовым признаком, по которому будет производиться поиск объектов, меткость. 
+
+Определим следующие термы, соответствующие признаку <<меткость>>:
+\begin{enumerate}[ 1{)}] 
+    \item ОМ --- очень меткий;
+    \item М --- меткий;
+    \item НОМ --- не очень меткий; 
+    \item НМ --- неметкий; 
+    \item ОНМ --- очень неметкий. 
+\end{enumerate}
+
+\clearpage
+
+\section{Анкетирование}
+
+Было проведено анкетирование следующих респондентов:
+\begin{enumerate}[ 1{)}]
+    \item Назиров Илхом, группа ИУ7-55Б --- Респондент 1;
+	\item Иванов Павел, группа ИУ7-55Б--- Респондент 2;
+	\item Щербина Михалил, группа ИУ7-55Б --- Респондент 3;
+	\item Вязовцев Максим, группа ИУ7-55Б --- Респондент 4;
+	\item Мансуров Владислав, группа ИУ7-56Б --- Респондент 5;
+	\item Голикова Софья, группа ИУ7-55Б --- Респондент 6;
+	\item Баринов Никита, группа ИУ7-51Б --- Респондент 7;
+	\item Загайнов Никита, группа ИУ7-52Б --- Респондент 8;
+	\item Ильин Дмитрий, группа ИУ7-55Б --- Респондент 9.
+\end{enumerate}
+
+Респонденты отвечали на вопросы, сформулированные в пункте \ref{sec:anketa}
+Статистика результатов анкетирования перечисленных респондентов продемонстрированы в таблицах~\ref{tbl:result_application_1} -- \ref{tbl:result_application_2}. 
+В данных таблицах термы соответствуют обозначенным в \ref{formal} сокращенным термам.
+
+\clearpage
+\begin{table}[ht]
+	\small
+	\begin{center}
+		\begin{threeparttable}
+		\caption{Результаты анкетирования (Часть 1)}
+		\label{tbl:result_application_1}
+		\begin{tabular}{|p{1.5cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+			\hline
+			\multirow{\bfseries Терма} & \multicolumn{6}{c|}{\bfseries Категория} \\ \cline{2-7}
+			& \bfseries Проф. снайпер & \bfseries Спец. SWAT & \bfseries Опыт. Стрелок & \bfseries Поли-цейский & \bfseries Стрелок-любитель & \bfseries Срочник \\
+			\hline
+			ОМ & \text{9} & \text{8} & \text{5} & \text{1} & \text{0} & \text{0} \\
+			\hline
+			М & \text{0} & \text{1} & \text{4} & \text{5} & \text{5} & \text{3} \\
+			\hline
+			НОМ & \text{0} & \text{0} & \text{0} & \text{3} & \text{4} & \text{5} \\
+			\hline
+			НМ & \text{0} & \text{0} & \text{0} & \text{0} & \text{0} & \text{1} \\
+			\hline
+			ОНМ & \text{0} & \text{0} & \text{0} & \text{0} & \text{0} & \text{0} \\
+			\hline
+			\end{tabular}
+		\end{threeparttable}
+	\end{center}
+\end{table}
+
+\begin{table}[ht]
+	\small
+	\begin{center}
+		\begin{threeparttable}
+		\caption{Результаты анкетирования (Часть 2)}
+		\label{tbl:result_application_2}
+		\begin{tabular}{|p{1.5cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+			\hline
+		\multirow{\bfseries Терма} & \multicolumn{4}{c|}{\bfseries Категория} \\ \cline{2-5}
+			 & \bfseries Гук & \bfseries Имперский штурмовик  & \bfseries Африканский повстанец  & \bfseries Китайский фермер \\
+			\hline
+			ОМ & \text{0} & \text{0} & \text{0} & \text{0} \\% & \text{0} & \text{0} \\
+			\hline
+			М & \text{0} & \text{0} & \text{0} & \text{0} \\% & \text{5} & \text{3} \\
+			\hline
+			НОМ & \text{3} & \text{0} & \text{0} & \text{0} \\% & \text{4} & \text{5} \\
+			\hline
+			НМ & \text{5} & \text{6} & \text{2} & \text{0} \\% & \text{0} & \text{1} \\
+			\hline
+			ОНМ & \text{1} & \text{3} & \text{7} & \text{9} \\% & \text{0} & \text{0} \\
+			\hline
+			\end{tabular}
+		\end{threeparttable}
+	\end{center}
+\end{table}
+\newpage
+\begin{figure}
+\begin{tikzpicture}[scale=1.2]\label{}
+  \begin{axis}
+        [
+        ,width=12cm
+        ,xlabel=Категория стрелков
+        ,ylabel=$\mu$
+        ,xtick=data,
+       % ,xtick={0,1,2}
+       % ,ytick={0,1,2,3,4,5,6,7,8,9}
+       ,xticklabels={A, B, C, D, E, F, G, H, I, G}
+        ]
+        \addplot+[sharp plot, legend entry=ОМ ] coordinates
+        {(0, 1.0) (1, 0.888) (2, 0.444) (3, 0.111) (4, 0) (5, 0) (6, 0) (7, 0) (8, 0) (9, 0)};
+        \addplot+[sharp plot, legend entry=М  ] coordinates
+        {(0, 0.0) (1, 0.111) (2, 0.555) (3, 0.666) (4, 0.555) (5, 0.444) (6, 0) (7, 0) (8, 0) (9, 0)};
+        \addplot+[sharp plot, legend entry=НОМ ] coordinates
+        {(0, 0.0) (1, 0.0) (2, 0.0) (3, 0.222) (4, 0.444) (5, 0.444) (6, 0.444) (7, 0) (8, 0) (9, 0)};
+        \addplot+[sharp plot, legend entry=Н ] coordinates
+        {(0, 0.0) (1, 0.0) (2, 0.0) (3, 0) (4, 0) (5, 0.111) (6, 0.444) (7, 0.666) (8, 0.222) (9, 0)};
+        \addplot+[sharp plot, green, legend entry=ОНМ ] coordinates
+        {(0, 0.0) (1, 0.0) (2, 0.0) (3, 0) (4, 0) (5, 0) (6, 0.111) (7, 0.333) (8, 0.777) (9, 1)};
+    \end{axis}
+\end{tikzpicture}
+\caption{Функция принадлежности термам числовых значений признака}
+\end{figure}
+Обозначения:
+\begin{enumerate}[ 1{)}] 
+    \item A --- Проф. снайпер
+    \item B --- Спец. SWAT 
+    \item C --- Опыт. Стрелок 
+    \item D --- Полицейский 
+    \item E --- Стрелок-любитель 
+    \item F --- Срочник
+    \item G --- Гук
+    \item H --- Имперский штурмовик 
+    \item I --- Африканский повстанец  
+    \item G --- Китайский фермер
+\end{enumerate}
+
+На рисунке 5 параметр µ означает частоту встречи (степень принадлеж-ности) терма для каждого напитка. Чем больше µ, тем чаще эксперты называли
+терм в отношении конкретного признака объекта. Таким образом, на рисунке 5
+представлены нечеткие функции принадлежности объектов термам ti.
+В соответствии с полученным графиком будем считать меткость следующим образом:
+\begin{enumerate}[ 1{)}]
+	\item очень меткий, если значение точности лежит в промежутке $[1.0; 2.875)$ MOA;
+	\item меткий, если значение точности лежит в промежутке $[2.875; 6)$ MOA;
+	\item не очень меткий, если значение точности лежит в промежутке $[6; 7)$ MOA;
+	\item неметкий, если значение точности лежит в промежутке $[7; 8.375)$ MOA;
+	\item очень неметкий, если значение их точности лежит в промежутке $[8.375; +\infty)$ MOA.
+\end{enumerate}
+
+\section{Пример выполнения}
+
+На рисунках \ref{img:example_simple} -- \ref{img:example_somebody} представлены примеры работы выполнения программы.
+\img{100mm}{example_simple}{Простой поиск по термам}% \newpage
+\img{100mm}{example_between}{Поиск между термами}% \newpage
+\img{80mm}{example_somebody}{Поиск по стрелкам} %\newpage
+\clearpage
+
+\section*{Вывод}
+В данном разделе были приведены результаты опроса респондентов. 
+На основе полученных данных сделан вывод о соотнесении признака объекта <<стрелок>> с термами, характеризующие меткость: <<очень меткий>>, <<меткий>>, <<не очень меткий>>, <<неметкий>>, <<очень неметкий>>.
